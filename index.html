@@ -1,0 +1,1383 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ТройкаГрад · Экспертное досье №2 — Мастер-план v28 + площадки</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F1E6; --paper2:#EFE7D4; --surface:#FFFDF7; --line:#D8CDB8; --line2:#C9BCA2;
+  --ink:#23281F; --muted:#6B6353; --faint:#8A7F6A;
+  --pine:#1F3D2B; --pine2:#2E5A3C; --field:#3E7A4E; --sprout:#6FA07A;
+  --amber:#D9930D; --amber2:#B4770A; --gold:#C9A227;
+  --clay:#C2402A; --clay2:#9E3120; --blue:#2E6E8E; --blue2:#1F5570;
+  --ok:#2E7D46; --warn:#C07F10; --danger:#B3362B; --info:#2E6E8E;
+  --disp:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --body:'Inter',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --mono:'JetBrains Mono',Consolas,'Courier New',monospace;
+  --nav-h:64px; --shadow:0 10px 30px -12px rgba(31,61,43,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+::selection{background:var(--amber);color:var(--pine)}
+/* custom scrollbars */
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--paper2)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--pine2),var(--field));border:2px solid var(--paper2);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:var(--amber)}
+*{scrollbar-width:thin;scrollbar-color:var(--field) var(--paper2)}
+/* layered background */
+.bg-aurora{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+.bg-aurora::before,.bg-aurora::after{content:'';position:absolute;border-radius:50%;filter:blur(90px);opacity:.16}
+.bg-aurora::before{width:60vw;height:60vw;left:-18vw;top:-10vw;background:radial-gradient(circle at 30% 30%,var(--sprout),var(--amber) 55%,transparent 72%);animation:drift1 26s ease-in-out infinite alternate}
+.bg-aurora::after{width:52vw;height:52vw;right:-16vw;bottom:-14vw;background:radial-gradient(circle at 60% 60%,var(--blue),var(--gold) 60%,transparent 75%);animation:drift2 32s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate(9vw,7vh) scale(1.12)}}
+@keyframes drift2{to{transform:translate(-8vw,-6vh) scale(1.08)}}
+.bg-grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E")}
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(100deg,var(--pine) 0%,#24462F 60%,var(--pine2) 100%);border-bottom:1px solid rgba(201,162,39,.35);box-shadow:0 6px 24px -10px rgba(31,61,43,.55)}
+.nav-in{max-width:1400px;margin:0 auto;height:var(--nav-h);display:flex;align-items:center;gap:18px;padding:0 20px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none;flex-shrink:0}
+.brand svg{width:30px;height:30px}
+.brand b{font-family:var(--disp);font-size:19px;font-weight:700;letter-spacing:.5px}
+.brand small{font-family:var(--mono);font-size:9.5px;color:var(--gold);display:block;letter-spacing:1.5px}
+.nav-links{display:flex;gap:2px;flex:1;justify-content:center;min-width:0}
+.nav-links a{color:#D9D2C0;text-decoration:none;font-size:12.5px;font-weight:500;padding:7px 11px;border-radius:6px;white-space:nowrap;transition:.2s;position:relative}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nav-links a.on{color:var(--gold)}
+.nav-links a.on::after{content:'';position:absolute;left:11px;right:11px;bottom:2px;height:2px;background:var(--amber);border-radius:2px}
+.exports{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;gap:7px;border:none;cursor:pointer;font-family:var(--body);font-weight:600;font-size:12.5px;padding:9px 15px;border-radius:7px;transition:.18s;text-decoration:none}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px -6px rgba(0,0,0,.4)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-docx{background:var(--blue);color:#fff}
+.btn-pdf{background:var(--clay);color:#fff}
+.btn-print{background:transparent;color:#D9D2C0;border:1px solid rgba(217,210,192,.4);padding:9px 11px}
+.btn-print:hover{color:#fff;border-color:var(--gold)}
+.btn svg{width:14px;height:14px}
+#progress{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:linear-gradient(90deg,var(--amber),var(--gold),var(--sprout));transition:width .1s linear;box-shadow:0 0 8px rgba(217,147,13,.7)}
+.chips{display:none;overflow-x:auto;gap:6px;padding:8px 16px;background:var(--pine);border-bottom:1px solid rgba(201,162,39,.3);position:fixed;top:var(--nav-h);left:0;right:0;z-index:99}
+.chips a{color:#D9D2C0;font-size:12px;text-decoration:none;padding:5px 12px;border:1px solid rgba(217,210,192,.3);border-radius:20px;white-space:nowrap}
+.chips a.on{background:var(--amber);color:var(--pine);border-color:var(--amber);font-weight:600}
+/* layout */
+.shell{max-width:1400px;margin:0 auto;padding:calc(var(--nav-h) + 26px) 20px 60px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:44px}
+aside{position:sticky;top:calc(var(--nav-h) + 26px);align-self:start;max-height:calc(100vh - var(--nav-h) - 50px);overflow-y:auto;padding-right:6px}
+.toc-t{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--faint);margin-bottom:12px;text-transform:uppercase}
+aside a{display:flex;gap:10px;align-items:baseline;padding:6px 10px;border-left:2px solid var(--line);color:var(--muted);text-decoration:none;font-size:12.5px;transition:.18s;line-height:1.4}
+aside a i{font-family:var(--mono);font-style:normal;font-size:10px;color:var(--faint);min-width:20px}
+aside a:hover{color:var(--ink);border-color:var(--field);background:rgba(62,122,78,.06)}
+aside a.on{color:var(--pine);border-color:var(--amber);background:linear-gradient(90deg,rgba(217,147,13,.12),transparent);font-weight:600}
+aside a.on i{color:var(--amber2)}
+aside .toc-meta{margin-top:18px;padding:12px;border:1px dashed var(--line2);border-radius:8px;font-family:var(--mono);font-size:10px;color:var(--faint);line-height:1.8}
+main{min-width:0}
+section{scroll-margin-top:calc(var(--nav-h) + 20px);margin-bottom:56px}
+/* hero */
+.hero{background:linear-gradient(135deg,var(--pine) 0%,#25482F 45%,var(--pine2) 78%,#3A6B44 100%);border-radius:16px;color:var(--paper);padding:52px 48px 40px;position:relative;overflow:hidden;margin-bottom:48px;box-shadow:var(--shadow)}
+.hero-map{position:absolute;inset:0;opacity:.14;pointer-events:none}
+.hero-in{position:relative;z-index:2}
+.hero .kick{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-family:var(--disp);font-size:clamp(30px,4.2vw,50px);font-weight:700;line-height:1.08;max-width:820px;margin-bottom:14px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .sub{font-size:15px;color:#D9D2C0;max-width:720px;margin-bottom:26px}
+.stamp{position:absolute;top:38px;right:42px;transform:rotate(6deg);border:2.5px solid var(--gold);color:var(--gold);border-radius:8px;padding:10px 16px;font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;text-align:center;line-height:1.7;opacity:.9;z-index:3;background:rgba(31,61,43,.35)}
+.stamp b{display:block;font-size:12px}
+.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:8px}
+.hs{background:rgba(255,253,247,.07);border:1px solid rgba(201,162,39,.3);border-radius:10px;padding:14px 16px;backdrop-filter:blur(2px)}
+.hs .v{font-family:var(--disp);font-size:30px;font-weight:700;color:var(--gold);line-height:1.1}
+.hs .v small{font-size:16px}
+.hs .l{font-size:11px;color:#C9C2B0;margin-top:4px;line-height:1.4}
+.coords{margin-top:26px;border-top:1px solid rgba(201,162,39,.25);padding-top:14px;overflow:hidden;white-space:nowrap;font-family:var(--mono);font-size:10.5px;color:#A8B8A0;letter-spacing:1px}
+.coords span{display:inline-block;animation:tick 40s linear infinite;padding-right:60px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* section headers */
+.kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--acc,var(--field));margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.kicker::after{content:'';height:1px;flex:0 0 60px;background:linear-gradient(90deg,var(--acc,var(--field)),transparent)}
+h2{font-family:var(--disp);font-size:clamp(26px,3vw,36px);font-weight:700;color:var(--pine);line-height:1.12;margin-bottom:14px}
+h2 .no{color:var(--acc,var(--amber));font-size:.7em;vertical-align:super;margin-right:6px;font-family:var(--mono);font-weight:600}
+h3{font-family:var(--disp);font-size:22px;font-weight:700;color:var(--pine2);margin:26px 0 10px}
+h4{font-size:14px;font-weight:700;color:var(--amber2);margin:18px 0 8px;text-transform:uppercase;letter-spacing:.5px;font-family:var(--body)}
+.lede{font-size:16px;color:var(--muted);max-width:860px;margin-bottom:18px}
+p{margin-bottom:11px;max-width:900px}
+ul,ol{margin:0 0 14px 22px}
+li{margin-bottom:6px}
+b,strong{color:var(--pine)}
+.mono{font-family:var(--mono)}
+a{color:var(--blue)}
+/* tables */
+.tw{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:10px;background:var(--surface);box-shadow:0 4px 14px -8px rgba(31,61,43,.18)}
+table{width:100%;border-collapse:collapse;font-size:12.8px;min-width:560px}
+th{background:linear-gradient(120deg,var(--pine),var(--pine2));color:var(--paper);text-align:left;padding:10px 12px;font-size:11.5px;font-weight:600;letter-spacing:.3px;border-right:1px solid rgba(246,241,230,.12);white-space:nowrap}
+td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top;line-height:1.5}
+tbody tr:nth-child(even){background:#F3EDDF}
+tbody tr:hover{background:rgba(217,147,13,.08)}
+td.num,th.num{font-family:var(--mono);font-size:12px;text-align:right;white-space:nowrap}
+.tcap{font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:1px;margin:14px 0 -8px;text-transform:uppercase}
+/* badges & notes */
+.bdg{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:600;padding:3px 9px;border-radius:12px;letter-spacing:.5px;white-space:nowrap}
+.b-crit{background:#F7DDD6;color:var(--clay2);border:1px solid #E5B4A6}
+.b-high{background:#F9EFD8;color:var(--amber2);border:1px solid #E8CE96}
+.b-mid{background:#E9F1F5;color:var(--blue2);border:1px solid #BFD6E0}
+.b-ok{background:#E9F3EC;color:var(--ok);border:1px solid #BFDCC8}
+.b-new{background:var(--pine);color:var(--gold)}
+.note{border-left:4px solid var(--info);background:#E9F1F5;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;max-width:900px}
+.note .note-t{font-weight:700;font-size:13px;margin-bottom:6px;display:flex;gap:8px;align-items:center;color:var(--blue2)}
+.note p{margin-bottom:6px;font-size:13.5px}
+.note ul{margin-bottom:4px;font-size:13.5px}
+.note.risk{border-color:var(--danger);background:#FBEDE9}.note.risk .note-t{color:var(--clay2)}
+.note.ok{border-color:var(--ok);background:#E9F3EC}.note.ok .note-t{color:var(--ok)}
+.note.warn{border-color:var(--warn);background:#F9F1DE}.note.warn .note-t{color:var(--amber2)}
+/* cards & widgets */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:0 4px 16px -10px rgba(31,61,43,.2);position:relative}
+.card::before{content:'';position:absolute;top:0;left:20px;right:20px;height:3px;border-radius:0 0 4px 4px;background:linear-gradient(90deg,var(--acc,var(--field)),var(--gold))}
+.w-head{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.w-title{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--faint);text-transform:uppercase}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+/* score bars */
+.score{display:flex;align-items:center;gap:12px;margin:7px 0}
+.score .sl{flex:0 0 220px;font-size:12.5px;color:var(--muted)}
+.score .sb{flex:1;height:14px;background:var(--paper2);border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.score .sf{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--field),var(--sprout));width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.score .sf.mid{background:linear-gradient(90deg,var(--amber2),var(--gold))}
+.score .sf.low{background:linear-gradient(90deg,var(--clay2),var(--clay))}
+.score .sv{font-family:var(--mono);font-size:12px;font-weight:600;width:52px;text-align:right;color:var(--pine)}
+/* map */
+.map-wrap{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px}
+.map-box{background:linear-gradient(160deg,#FBF7EC,#F1E9D6);border:1px solid var(--line2);border-radius:12px;overflow:hidden;position:relative}
+.map-box svg{display:block;width:100%;height:auto}
+.layers{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px;border-top:1px solid var(--line);background:var(--surface)}
+.layers label{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-family:var(--mono);color:var(--muted);cursor:pointer;padding:4px 10px;border:1px solid var(--line);border-radius:14px;transition:.15s;user-select:none}
+.layers label:hover{border-color:var(--field);color:var(--pine)}
+.layers input{accent-color:var(--field)}
+.layers label:has(input:checked){background:rgba(62,122,78,.1);border-color:var(--field);color:var(--pine)}
+.site{cursor:pointer}
+.site circle.core{fill:var(--pine);stroke:var(--gold);stroke-width:2;transition:.2s}
+.site text{fill:var(--paper);font-family:var(--mono);font-size:12px;font-weight:600;text-anchor:middle;pointer-events:none}
+.site:hover circle.core{fill:var(--field)}
+.site.on circle.core{fill:var(--amber);stroke:var(--pine)}
+.site.on text{fill:var(--pine)}
+.site .ring{fill:none;stroke:var(--amber);stroke-width:2;opacity:0}
+.site.on .ring{opacity:1;animation:pulse 2s ease-out infinite}
+@keyframes pulse{0%{r:16;opacity:.9}100%{r:34;opacity:0}}
+.passport{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.pp-head{display:flex;justify-content:space-between;align-items:start;gap:8px}
+.pp-num{font-family:var(--disp);font-size:40px;font-weight:700;color:var(--amber);line-height:1}
+.pp-name{font-family:var(--disp);font-size:19px;font-weight:700;color:var(--pine);line-height:1.15}
+.pp-coords{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.pp-rows{display:grid;gap:7px;font-size:12.5px}
+.pp-rows div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:6px}
+.pp-rows span:first-child{color:var(--muted)}
+.pp-rows span:last-child{font-weight:600;text-align:right;color:var(--pine)}
+.pp-risk{font-size:12px;color:var(--clay2);background:#FBEDE9;border-radius:8px;padding:9px 11px;line-height:1.5}
+.pp-verdict{font-size:12.5px;color:var(--pine);background:#E9F3EC;border-radius:8px;padding:9px 11px;line-height:1.5}
+.pp-nav{display:flex;gap:8px;margin-top:auto}
+.pp-nav button{flex:1;padding:8px;border:1px solid var(--line);background:var(--paper);border-radius:7px;cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--pine);transition:.15s}
+.pp-nav button:hover{background:var(--amber);border-color:var(--amber)}
+/* scenarios */
+.scn-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.scn-tab{border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:12px 14px;cursor:pointer;text-align:left;transition:.18s;font-family:var(--body)}
+.scn-tab:hover{border-color:var(--field);transform:translateY(-1px)}
+.scn-tab.on{border-color:var(--amber);background:linear-gradient(135deg,rgba(217,147,13,.12),rgba(201,162,39,.05));box-shadow:0 6px 16px -8px rgba(217,147,13,.5)}
+.scn-tab .st{font-weight:700;font-size:13px;color:var(--pine);display:block}
+.scn-tab .ss{font-size:11px;color:var(--muted);display:block;margin-top:3px;line-height:1.4}
+.scn-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+.sk{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:11px 13px;text-align:center}
+.sk .v{font-family:var(--disp);font-size:24px;font-weight:700;color:var(--pine);line-height:1.1}
+.sk .v.neg{color:var(--clay)}
+.sk .l{font-size:10px;color:var(--faint);font-family:var(--mono);letter-spacing:.5px;margin-top:3px;text-transform:uppercase}
+.scn-note{font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px;line-height:1.6}
+/* calculator */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.c-inputs{display:grid;gap:13px}
+.ci label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:4px}
+.ci label output{font-family:var(--mono);font-weight:600;color:var(--pine)}
+.ci input[type=range]{width:100%;appearance:none;height:6px;border-radius:4px;background:linear-gradient(90deg,var(--field) var(--p,50%),var(--paper2) var(--p,50%));outline:none;cursor:pointer}
+.ci input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:50%;background:var(--amber);border:3px solid var(--surface);box-shadow:0 2px 6px rgba(31,61,43,.4);transition:.15s}
+.ci input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15);background:var(--gold)}
+.ci input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--amber);border:3px solid var(--surface);cursor:pointer}
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.presets button{padding:7px 12px;font-size:11.5px;font-family:var(--mono);border:1px solid var(--line);background:var(--paper);border-radius:14px;cursor:pointer;color:var(--pine);transition:.15s}
+.presets button:hover{background:var(--pine);color:var(--gold);border-color:var(--pine)}
+.c-out{background:linear-gradient(150deg,var(--pine),var(--pine2));border-radius:12px;padding:20px;color:var(--paper);display:flex;flex-direction:column;gap:12px}
+.co-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(201,162,39,.25);padding-bottom:8px}
+.co-row span{font-size:12px;color:#C9C2B0}
+.co-row b{font-family:var(--mono);font-size:16px;color:var(--gold)}
+.gauge{height:16px;background:rgba(255,255,255,.12);border-radius:9px;overflow:hidden;margin-top:4px}
+.gauge i{display:block;height:100%;width:0;border-radius:9px;background:var(--sprout);transition:.4s cubic-bezier(.2,.8,.2,1)}
+.gauge i.warn{background:var(--gold)}.gauge i.bad{background:#E06A4A}
+.cov-t{font-family:var(--disp);font-size:34px;font-weight:700;line-height:1;color:#fff}
+.cov-t small{font-size:14px;color:#C9C2B0;font-family:var(--body);font-weight:400}
+/* risks */
+.chipbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px;align-items:center}
+.chip{padding:6px 13px;font-size:11.5px;font-family:var(--mono);border:1px solid var(--line);background:var(--paper);border-radius:16px;cursor:pointer;color:var(--muted);transition:.15s}
+.chip:hover{border-color:var(--field);color:var(--pine)}
+.chip.on{background:var(--pine);color:var(--gold);border-color:var(--pine)}
+.chip.sort{margin-left:auto;border-style:dashed}
+.rrow{cursor:pointer}
+.rrow td:first-child{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.rdet{display:none;background:#FBF7EC!important}
+.rdet td{font-size:12.5px;color:var(--muted);border-top:none;padding-top:2px}
+.rrow.open+.rdet{display:table-row}
+.rrow .rname{font-weight:600;color:var(--pine)}
+.rrow .rcat{font-size:10px;font-family:var(--mono);color:var(--faint);display:block}
+/* roadmap */
+.gantt-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;overflow-x:auto}
+.gantt-box svg{min-width:760px;width:100%;height:auto;display:block}
+.stage{display:grid;grid-template-columns:110px 1fr;gap:16px;margin-bottom:14px}
+.stage-n{background:linear-gradient(160deg,var(--pine),var(--pine2));color:var(--gold);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;font-family:var(--mono)}
+.stage-n b{font-family:var(--disp);font-size:28px;color:#fff;line-height:1}
+.stage-n span{font-size:9.5px;letter-spacing:1px;margin-top:4px;text-align:center}
+.stage-b{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+.stage-b h4{margin-top:0}
+.gate{font-size:12px;background:#F9F1DE;border:1px dashed var(--gold);border-radius:7px;padding:8px 12px;margin-top:8px;color:var(--amber2)}
+.gate b{color:var(--amber2)}
+/* ladder */
+.ladder{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.lad{flex:1;min-width:120px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center;position:relative}
+.lad::after{content:'→';position:absolute;right:-13px;top:50%;transform:translateY(-50%);color:var(--amber);font-weight:700;z-index:2}
+.lad:last-child::after{display:none}
+.lad b{font-family:var(--disp);font-size:22px;color:var(--pine);display:block}
+.lad span{font-size:11px;color:var(--muted);line-height:1.4;display:block}
+/* misc */
+.irr-strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:14px 0;font-family:var(--mono)}
+.irr-strip .is{padding:5px 10px;border-radius:7px;font-size:11.5px;background:var(--paper2);border:1px solid var(--line);color:var(--muted)}
+.irr-strip .is.bad{background:#F7DDD6;color:var(--clay2);border-color:#E5B4A6}
+.irr-strip .is.good{background:var(--pine);color:var(--gold);border-color:var(--pine);font-weight:600}
+.irr-strip .ar{color:var(--faint);font-size:11px}
+.ukaz{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:7px;max-width:560px;margin:14px 0}
+.ukaz i{aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-style:normal;color:#fff;font-weight:600}
+.u-strong{background:var(--pine)}.u-dir{background:var(--field)}.u-ind{background:var(--gold);color:var(--pine)!important}.u-gap{background:var(--clay)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--muted);margin:8px 0}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.export-only{display:none}
+footer{background:linear-gradient(135deg,var(--pine),#25482F);color:#C9C2B0;margin-top:20px;border-radius:16px 16px 0 0;padding:40px 44px;position:relative;overflow:hidden}
+footer .fq{font-family:var(--disp);font-size:30px;color:var(--gold);font-weight:700;margin-bottom:10px}
+footer p{font-size:12px;max-width:820px}
+footer .f-meta{font-family:var(--mono);font-size:10px;color:#8FA58C;margin-top:16px;letter-spacing:1px}
+/* toast & overlay */
+#toasts{position:fixed;right:18px;bottom:18px;z-index:300;display:flex;flex-direction:column;gap:10px}
+.toast{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:9px;padding:12px 16px;font-size:13px;box-shadow:var(--shadow);max-width:340px;animation:tin .3s cubic-bezier(.2,.8,.2,1)}
+.toast.info{border-left-color:var(--info)}.toast.err{border-left-color:var(--danger)}
+@keyframes tin{from{transform:translateX(30px);opacity:0}}
+#overlay{position:fixed;inset:0;background:rgba(31,61,43,.6);backdrop-filter:blur(3px);z-index:400;display:none;align-items:center;justify-content:center;flex-direction:column;gap:18px;color:var(--paper)}
+#overlay.show{display:flex}
+.spin{width:54px;height:54px;position:relative}
+.spin i{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;animation:sp 1.1s linear infinite}
+.spin i:nth-child(1){border-top-color:var(--gold)}
+.spin i:nth-child(2){inset:8px;border-top-color:var(--sprout);animation-duration:.9s;animation-direction:reverse}
+.spin i:nth-child(3){inset:16px;border-top-color:var(--amber);animation-duration:.7s}
+@keyframes sp{to{transform:rotate(360deg)}}
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.rv.in{opacity:1;transform:none}
+/* responsive */
+@media(max-width:1240px){.shell{grid-template-columns:1fr}aside{display:none}}
+@media(max-width:1080px){.nav-links{display:none}.chips{display:flex}section{scroll-margin-top:118px}.map-wrap{grid-template-columns:1fr}.grid2,.calc{grid-template-columns:1fr}.hero{padding:36px 26px}.stamp{display:none}}
+@media(max-width:640px){.scn-tabs,.grid3{grid-template-columns:1fr}.stage{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr}.btn{padding:8px 11px;font-size:11.5px}.brand small{display:none}.shell{padding-left:14px;padding-right:14px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+/* print / pdf-mode */
+.pdf-mode .bg-aurora,.pdf-mode .bg-grain{display:none}
+.pdf-mode [data-noexport]{display:none!important}
+.pdf-mode .export-only{display:block!important}
+@media print{
+  @page{size:A4;margin:15mm 13mm 17mm}
+  nav,.chips,aside,#toasts,#overlay,.bg-aurora,.bg-grain,[data-noexport]{display:none!important}
+  .export-only{display:block!important}
+  body{background:#fff;font-size:10.2pt}
+  .shell{display:block;padding:0;max-width:none}
+  .hero{border-radius:0;padding:26px 24px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .hero h1{font-size:24pt}.coords{display:none}
+  section{margin-bottom:24px;break-before:page}
+  #s0,#s1{break-before:auto}
+  h2{font-size:17pt;break-after:avoid}h3{font-size:13pt;break-after:avoid}
+  .tw{border:none;box-shadow:none;overflow:visible;break-inside:auto}
+  table{min-width:0;font-size:8.6pt}th{white-space:normal}
+  thead{display:table-header-group}tr{break-inside:avoid}
+  .note,.card{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .rv{opacity:1!important;transform:none!important}
+  th,.hs,.stage-n,.c-out,.sk,.bdg{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{border-radius:0}
+}
+</style>
+</head>
+<body>
+<div class="bg-aurora"></div><div class="bg-grain"></div>
+
+<nav data-noexport>
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 40 40"><circle cx="15" cy="16" r="10" fill="none" stroke="#6FA07A" stroke-width="3"/><circle cx="25" cy="16" r="10" fill="none" stroke="#D9930D" stroke-width="3"/><circle cx="20" cy="25" r="10" fill="none" stroke="#7FB6C9" stroke-width="3"/></svg>
+      <span><b>ТРОЙКАГРАД</b><small>ЭКСПЕРТНОЕ ДОСЬЕ · v2.0</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#s0">Резюме</a><a href="#s1">Что нового</a><a href="#s3">Территория</a><a href="#s5">Экономика</a><a href="#s6">Жильё</a><a href="#s12">Риски</a><a href="#s15">Дорожная карта</a><a href="#s16">Вердикт</a>
+    </div>
+    <div class="exports">
+      <button class="btn btn-docx" id="bDocx" title="Скачать отчёт в формате Word (.docx)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v9M8 10L4.5 6.5M8 10l3.5-3.5M2 13h12" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>DOCX</button>
+      <button class="btn btn-pdf" id="bPdf" title="Экспорт в PDF (при недоступности прямой генерации — системный диалог печати)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v9M8 10L4.5 6.5M8 10l3.5-3.5M2 13h12" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>PDF</button>
+      <button class="btn btn-print" id="bPrint" title="Печать / Сохранить как PDF"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6V2h8v4M4 12H2V7h12v5h-2M4 10h8v4H4z"/></svg></button>
+    </div>
+    <div id="progress"></div>
+  </div>
+</nav>
+<div class="chips" id="chips" data-noexport>
+  <a href="#s0">Резюме</a><a href="#s1">Новое</a><a href="#s2">Качество</a><a href="#s3">Территория</a><a href="#s4">Стандарт</a><a href="#s5">Экономика</a><a href="#s6">Жильё</a><a href="#s7">Демография</a><a href="#s12">Риски</a><a href="#s15">Карта</a><a href="#s16">Вердикт</a>
+</div>
+
+<div class="shell" id="top">
+<aside data-noexport>
+  <div class="toc-t">Содержание досье</div>
+  <div id="toc">
+    <a href="#s0"><i>00</i>Резюме и интегральная оценка</a>
+    <a href="#s1"><i>01</i>Дельта-анализ новых вводных</a>
+    <a href="#s2"><i>02</i>Качество документа: реестр рассинхронизаций</a>
+    <a href="#s3"><i>03</i>Территория: 4 площадки и земельный баланс</a>
+    <a href="#s4"><i>04</i>Единый стандарт поселения</a>
+    <a href="#s5"><i>05</i>Экономика и финансовая модель</a>
+    <a href="#s6"><i>06</i>Жильё: калькулятор покрытия</a>
+    <a href="#s7"><i>07</i>Демография и программа «Кормилец»</a>
+    <a href="#s8"><i>08</i>Производство и кадры</a>
+    <a href="#s9"><i>09</i>Инфраструктура и экология</a>
+    <a href="#s10"><i>10</i>Право и управление</a>
+    <a href="#s11"><i>11</i>Политика: Указ №1014</a>
+    <a href="#s12"><i>12</i>Матрица рисков (19)</a>
+    <a href="#s13"><i>13</i>Польза: сейчас и на горизонте</a>
+    <a href="#s14"><i>14</i>Реестр предложений по доработке</a>
+    <a href="#s15"><i>15</i>Дорожная карта 2026–2046</a>
+    <a href="#s16"><i>16</i>Итоговый вердикт</a>
+  </div>
+  <div class="toc-meta">ДОСЬЕ №2 · 23.11.2026<br>Основание: мастер-план v28 (июль 2026, ред. 31.08.2026) + сборка слайдов «4 площадки» + Концепция 2.01 + презентация ФЭМ<br>Статус: экспертная оценка</div>
+</aside>
+
+<main id="report">
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <svg class="hero-map" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice" data-noexport>
+    <defs><pattern id="hg" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#C9A227" stroke-width=".5"/></pattern></defs>
+    <rect width="1000" height="400" fill="url(#hg)"/>
+    <path d="M0 260 Q250 200 500 250 T1000 220" fill="none" stroke="#D9930D" stroke-width="2"/>
+    <path d="M0 300 Q300 260 600 300 T1000 280" fill="none" stroke="#7FB6C9" stroke-width="1.5"/>
+    <circle cx="410" cy="120" r="50" fill="none" stroke="#C9A227" stroke-dasharray="5 5"/><circle cx="470" cy="270" r="50" fill="none" stroke="#C9A227" stroke-dasharray="5 5"/>
+    <circle cx="200" cy="230" r="50" fill="none" stroke="#C9A227" stroke-dasharray="5 5"/><circle cx="790" cy="310" r="50" fill="none" stroke="#C9A227" stroke-dasharray="5 5"/>
+  </svg>
+  <div class="stamp" data-noexport>ЭКСПЕРТНОЕ ЗАКЛЮЧЕНИЕ<b>УСЛОВНО РЕКОМДОВАНО</b>23.11.2026 · ДОСЬЕ №2</div>
+  <div class="hero-in">
+    <div class="kick">МПКСИ «ТройкаГрад» · Петушинский муниципальный округ · Владимирская область</div>
+    <h1>Мастер-план v28 и четыре площадки: <em>продвинутая экспертиза</em> новых вводных</h1>
+    <p class="sub">Дельта-анализ относительно Концепции 2.01 и ФЭМ; сведение финансовых показателей; земельный баланс контуров 12 000 га; проверка демографической программы; очередность площадок и дорожная карта 2026–2046 с «защитными клапанами».</p>
+    <div class="hero-stats" data-noexport>
+      <div class="hs rv" style="--i:0"><div class="v"><span data-count="122.05" data-dec="2">0</span><small> млрд ₽</small></div><div class="l">совокупный CAPEX программы</div></div>
+      <div class="hs rv" style="--i:1"><div class="v"><span data-count="12000">0</span><small> га</small></div><div class="l">контуры 4 площадок (по ~3 000 га)</div></div>
+      <div class="hs rv" style="--i:2"><div class="v"><span data-count="19.87" data-dec="2">0</span><small>%</small></div><div class="l">IRR — оптимистичный сценарий</div></div>
+      <div class="hs rv" style="--i:3"><div class="v">17<small>/21</small></div><div class="l">показателей Указа №1014</div></div>
+      <div class="hs rv" style="--i:4"><div class="v"><span data-count="12">0</span></div><div class="l">рассинхронизаций в документах</div></div>
+      <div class="hs rv" style="--i:5"><div class="v"><span data-count="19">0</span></div><div class="l">рисков в обновлённой матрице</div></div>
+    </div>
+    <div class="coords" data-noexport><span>56.0455°N 39.4970°E · ПЛОЩАДКА 1 &nbsp;◆&nbsp; 55.9363°N 39.5305°E · ПЛОЩАДКА 2 &nbsp;◆&nbsp; 55.9553°N 39.3639°E · ПЛОЩАДКА 3 &nbsp;◆&nbsp; 55.8928°N 39.7307°E · ПЛОЩАДКА 4 &nbsp;◆&nbsp; М-7 «ВОЛГА» · М-12 «ВОСТОК» · ГОРЬКОВСКАЯ Ж/Д · 120 КМ ДО МОСКВЫ &nbsp;◆&nbsp; 56.0455°N 39.4970°E · ПЛОЩАДКА 1 &nbsp;◆&nbsp; 55.9363°N 39.5305°E · ПЛОЩАДКА 2 &nbsp;◆&nbsp; 55.9553°N 39.3639°E · ПЛОЩАДКА 3 &nbsp;◆&nbsp; 55.8928°N 39.7307°E · ПЛОЩАДКА 4 &nbsp;◆&nbsp; М-7 «ВОЛГА» · М-12 «ВОСТОК» · ГОРЬКОВСКАЯ Ж/Д · 120 КМ ДО МОСКВЫ &nbsp;◆&nbsp;</span></div>
+  </div>
+</header>
+
+<!-- ============ S0 ============ -->
+<section id="s0" style="--acc:var(--field)">
+  <div class="kicker">Раздел 00 · Резюме</div>
+  <h2><span class="no">00</span>Резюме и интегральная оценка</h2>
+  <p class="lede">Новые вводные существенно усиливают проект: мастер-план v28 обрёл методологический каркас (разд. 0), честную историю уточнений финмодели и политическую рамку (Указ №1014, Стратегия 4146-р), а сборка слайдов превратила абстрактные «20 микрорайонов» в <b>четыре площадки с функциональной специализацией и единым стандартом поселения</b>. Одновременно углубились три системные уязвимости: земельный баланс не сведён, демографическая программа на 44,2 млрд ₽ не интегрирована в финмодель, а положительная доходность по-прежнему целиком держится на неподтверждённой линии элитных домокомплектов.</p>
+
+  <div class="export-only">
+    <p class="tcap">Таблица 0.1 — Паспорт отчёта</p>
+    <div class="tw"><table>
+      <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+      <tbody>
+        <tr><td>Объект экспертизы</td><td>Мастер-план Петушинского округа v28 (июль 2026, уточнения 27–31.08.2026); сборка слайдов «Четыре площадки развития»; Концепция кооперативной модели 2.01; презентация ФЭМ</td></tr>
+        <tr><td>Дата заключения</td><td>23 ноября 2026 г., досье №2 (развитие досье №1 от 18–19.11.2026)</td></tr>
+        <tr><td>Горизонт программы</td><td>2026–2046 (20 лет), иллюстративный прогноз до 2177</td></tr>
+        <tr><td>Ключевые ориентиры</td><td>10 000 домов · 50 000 переселенцев (+15 255 рождений по программе) · 1 566 субъектов бизнеса · 25 455 рабочих мест · CAPEX 122,05 млрд ₽</td></tr>
+        <tr><td>Итог</td><td>Условно рекомендовать к поэтапной реализации при 6 блокирующих условиях (раздел 16). Интегральная оценка 7,0/10</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <h3>Сводная оценка по направлениям (обновлено)</h3>
+  <div data-noexport>
+    <div class="score rv"><span class="sl">Методология мастер-планирования</span><div class="sb"><div class="sf" data-w="90"></div></div><span class="sv">9,0</span></div>
+    <div class="score rv"><span class="sl">Политическая рамка (Указ №1014)</span><div class="sb"><div class="sf" data-w="85"></div></div><span class="sv">8,5</span></div>
+    <div class="score rv"><span class="sl">Правовая проработка (Концепция)</span><div class="sb"><div class="sf" data-w="75"></div></div><span class="sv">7,5</span></div>
+    <div class="score rv"><span class="sl">Территория и стандарт поселения</span><div class="sb"><div class="sf" data-w="70"></div></div><span class="sv">7,0</span></div>
+    <div class="score rv"><span class="sl">Управление и институты</span><div class="sb"><div class="sf" data-w="70"></div></div><span class="sv">7,0</span></div>
+    <div class="score rv"><span class="sl">Экологическая устойчивость</span><div class="sb"><div class="sf" data-w="70"></div></div><span class="sv">7,0</span></div>
+    <div class="score rv"><span class="sl">Финансовая модель</span><div class="sb"><div class="sf mid" data-w="65"></div></div><span class="sv">6,5</span></div>
+    <div class="score rv"><span class="sl">Производственная реализуемость</span><div class="sb"><div class="sf mid" data-w="65"></div></div><span class="sv">6,5</span></div>
+    <div class="score rv"><span class="sl">Инфраструктурный бюджет</span><div class="sb"><div class="sf mid" data-w="60"></div></div><span class="sv">6,0</span></div>
+    <div class="score rv"><span class="sl">Демографическая программа</span><div class="sb"><div class="sf low" data-w="55"></div></div><span class="sv">5,5</span></div>
+  </div>
+
+  <div class="note ok"><div class="note-t">◆ Что стало сильнее</div>
+    <ul>
+      <li><b>Замкнутый контур управления</b> «зонирование → финансы → этапность → контроль → корректировка» (разд. 0.5) — признак мастер-плана, доходящего до реализации.</li>
+      <li><b>Честная история IRR</b> (86,2% → 1,36% → 9,45% → 19,87%) с самокритикой по каждому допущению — редкая для российских концепций методологическая зрелость.</li>
+      <li><b>Пространственная конкретика</b>: 4 площадки, специализация, единый стандарт «дом → двор → улица → поселение», 5-минутная доступность, очередь из 4–6 домов.</li>
+      <li><b>Двойной правовой контур</b>: кооперация + система «АС» как резервная конструкция; 23 позиции правовой адаптации в Концепции.</li>
+    </ul>
+  </div>
+  <div class="note risk"><div class="note-t">◆ Что осталось критичным</div>
+    <ul>
+      <li><b>Разд. 14</b>: +5 млрд ₽ EBIT/год (маржа 100%) — единственная строка, переводящая модель в плюс; без неё IRR 9,45% &lt; барьера 12%, NPV −2,37 млрд ₽.</li>
+      <li><b>Земельный дисбаланс</b>: контуры 12 000 га против 8 034 га неиспользуемых угодий — причём эта цифра取自 статистики <i>старого</i> района, до разделения 2025 г.</li>
+      <li><b>«Родился кормилец»</b>: 44,2 млрд ₽ обязательств за 20 лет, пик 3,84 млрд/год, хвост до 38-го года модели — вне финмодели.</li>
+      <li><b>12 рассинхронизаций</b> между разделами v28, слайдами и Концепцией (реестр — раздел 02), включая противоречие по гарантиям региона для облигаций ДОМ.РФ.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ S1 ============ -->
+<section id="s1" style="--acc:var(--amber)">
+  <div class="kicker">Раздел 01 · Дельта-анализ</div>
+  <h2><span class="no">01</span>Что нового в v28 и слайдах: 12 вводных</h2>
+  <p class="lede">Сопоставление с базой досье №1 (Концепция 2.01 + ФЭМ). Оценка — экспертная, по шкале «усиливает / требует доработки / критично».</p>
+  <p class="tcap">Таблица 1.1 — Дельта-анализ новых вводных</p>
+  <div class="tw"><table>
+    <thead><tr><th style="width:26%">Нововведение</th><th style="width:14%">Источник</th><th>Суть и экспертная оценка</th><th style="width:13%">Статус</th></tr></thead>
+    <tbody>
+      <tr><td><b>Методологический каркас</b></td><td>v28, разд. 0</td><td>Мастер-план как замкнутый цикл с обратной связью; дублирование правовых и финансовых каналов. Сильнейшее дополнение — переводит документ из презентации в инструмент управления.</td><td><span class="bdg b-ok">Усиливает</span></td></tr>
+      <tr><td><b>4 площадки со специализацией</b></td><td>Слайды; v28, 2.8</td><td>П1 — жильё+сервис у пруда; П2 — жильё+деловая зона у М-7/ж-д; П3 — жильё+производственно-строительная база (лесопилка, ДОК); П4 — агроусадьбы+агротуризм. Контуры условны, геодезии нет.</td><td><span class="bdg b-ok">Усиливает</span></td></tr>
+      <tr><td><b>Единый стандарт поселения</b></td><td>Слайды</td><td>«Дом → двор 4–6 домов → квартал → улица → поселение»; усадебная малоэтажка от 10 соток; абрикосовые аллеи; парковки по периметру; 20–30 км/ч; 5-мин доступность. Готовая основа документа 6.19.</td><td><span class="bdg b-ok">Усиливает</span></td></tr>
+      <tr><td><b>Демографическая программа</b></td><td>v28, 2.9</td><td>3,65 млн ₽/ребёнок; +15 255 рождений; 44,2 млрд ₽ за 20 лет; пик ≈26% EBIT; <b>не интегрирована в ФЭМ</b>; обязательства до 38-го года модели.</td><td><span class="bdg b-crit">Критично</span></td></tr>
+      <tr><td><b>Линия элитных домокомплектов</b></td><td>v28, разд. 14 Допущений</td><td>500–1 000 шт/год × (20−10) млн ₽ = +5 млрд EBIT. Себестоимость 50 тыс ₽/м² ниже рыночной отделки обычного дома (55–73 тыс). Сама модель признаёт допущение оптимистичным.</td><td><span class="bdg b-crit">Критично</span></td></tr>
+      <tr><td><b>ТОР + контур ЕСХН</b></td><td>v28, разд. 15–16</td><td>ТОР для 4 объектов ДСК-цепочки: +0,97 п.п. IRR — требует постановления Правительства (прецедент: Камешково-2017). ЕСХН 6% для СПоК: +0,47 п.п. — реалистично при доле профильной выручки ≥70%.</td><td><span class="bdg b-high">Условно</span></td></tr>
+      <tr><td><b>Возврат госинструментов</b></td><td>v28, 7.7</td><td>КРСТ 7,25 млрд (жильё 8% + инфраструктура 4,64%), облигации ДОМ.РФ 6,93 млрд, льготная древесина 2,66 млрд. Мультипликатор 7,06. <b>Но:</b> ДОМ.РФ требует 90% гарантию субъекта — конфликт с тезисом «без гарантий региона».</td><td><span class="bdg b-high">Требует доработки</span></td></tr>
+      <tr><td><b>Лесной кодекс, ст. 30</b></td><td>v28, 7.7; слайд 17</td><td>100 м³/дом × (3 000−340) ₽ = 266 тыс ₽ экономии/дом. В сумме 1 млн м³ на программу — нужна сверка расчётной лесосеки с лесничеством (лесистость 56%).</td><td><span class="bdg b-high">Условно</span></td></tr>
+      <tr><td><b>SWOT, чувствительность, АО-стратегия</b></td><td>v28, 2.10; 8.8–8.9</td><td>Кейсы Говарда (потолок дивидендов 5%) и Хуаси (долг 67% активов → утрата контроля) — правильные исторические уроки; 4 условия АО следует закрепить уставными решениями.</td><td><span class="bdg b-ok">Усиливает</span></td></tr>
+      <tr><td><b>Кадры и институты поддержки</b></td><td>v28, 6.8–6.10</td><td>МФЦ для бизнеса, коворкинг, дуальное образование, координация агротуризма — организационно верно, но не включено в CAPEX/OPEX модели.</td><td><span class="bdg b-high">Требует доработки</span></td></tr>
+      <tr><td><b>150 лет + Указ №1014</b></td><td>v28, 12.8–12.9</td><td>Визионерский горизонт до 2177 (население ~150 тыс., EBIT ×21) — сценарий, не прогноз. 17/21 показателей Указа закрыты; 4 пробела требуют целевых модулей.</td><td><span class="bdg b-ok">Усиливает</span></td></tr>
+      <tr><td><b>Система «АС» как альтернатива</b></td><td>v28, разд. 14</td><td>ООО «Кластер» + МБУ через 83-ФЗ + паспорт территории. Держать как резервную конструкцию для отдельных проектов, не как параллельное управление.</td><td><span class="bdg b-mid">Резерв</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><div class="note-t">◆ Вывод по дельте</div><p>Из 12 вводных 6 усиливают проект, 4 требуют доработки, 2 критичны. Ключевой сдвиг: проект перешёл от «идеи масштаба» к <b>проектируемой территории</b> — но финансовая и земельная бухгалтерия за пространственной проработкой не поспевает.</p></div>
+</section>
+
+<!-- ============ S2 ============ -->
+<section id="s2" style="--acc:var(--clay)">
+  <div class="kicker">Раздел 02 · Качество документа</div>
+  <h2><span class="no">02</span>Реестр рассинхронизаций: 12 расхождений</h2>
+  <p class="lede">Многократные уточнения ФЭМ (27–31.08.2026) обновили резюме и раздел 9, но не все сводные таблицы. При коммуникации с властью, ДОМ.РФ и пайщиками разные разделы одного документа дают разные цифры — это блокирующий дефект доверия. Ниже — полный реестр с рекомендуемыми унифицированными значениями (по логике последнего уточнения 31.08.2026).</p>
+  <p class="tcap">Таблица 2.1 — Реестр рассинхронизаций и унифицированные значения</p>
+  <div class="tw"><table>
+    <thead><tr><th>№</th><th>Показатель</th><th>Расхождение</th><th>Унифицировать</th><th>Крит.</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>EBIT полной мощности</td><td>Разд. 3.2 / 8.5 / 11.1 / 13.2: <span class="mono">8 834,0 млн</span> ↔ разд. 1.2: <span class="mono">15 000,55 млн</span></td><td class="num">15 000,55 млн ₽/год</td><td><span class="bdg b-crit">Высокая</span></td></tr>
+      <tr><td class="num">2</td><td>Налоги/год на полной мощности</td><td>v28 разд. 1.2: <span class="mono">8 918,06 млн</span> ↔ презентация: <span class="mono">8 707,6 млн</span>. Разница = 210,48 млн — ровно экономия ЕСХН: презентация учла разд. 16, резюме v28 — нет</td><td class="num">8 707,6 млн ₽/год</td><td><span class="bdg b-crit">Высокая</span></td></tr>
+      <tr><td class="num">3</td><td>Накопленные налоги за 20 лет</td><td>Разд. 12.3: <span class="mono">80,3 млрд</span> ↔ разд. 9.2: <span class="mono">91,94 млрд</span></td><td class="num">91 942,7 млн ₽</td><td><span class="bdg b-high">Средняя</span></td></tr>
+      <tr><td class="num">4</td><td>NPV бюджетного эффекта</td><td>Разд. 12.9.4: <span class="mono">+20,60 млрд</span> ↔ разд. 9.2: <span class="mono">+17,25 млрд</span> (после госучастия и ЕСХН)</td><td class="num">+17 246,7 млн ₽</td><td><span class="bdg b-high">Средняя</span></td></tr>
+      <tr><td class="num">5</td><td>Чистая прибыль / доля кооператива</td><td>Разд. 6.4.1: <span class="mono">7 422,5 / 3 785,5 млн</span> ↔ разд. 4.7: <span class="mono">12 333,8 / 6 290,3 млн</span></td><td class="num">12 333,8 / 6 290,3</td><td><span class="bdg b-crit">Высокая</span></td></tr>
+      <tr><td class="num">6</td><td>Собственные средства домохозяйства</td><td>Разд. 8.4.2: <span class="mono">0%</span> ↔ разд. 4.7 / 5.2: <span class="mono">5%</span> (ред. 31.08)</td><td class="num">5% = 486 700 ₽</td><td><span class="bdg b-high">Средняя</span></td></tr>
+      <tr><td class="num">7</td><td>Неделимый фонд развития</td><td>Разд. 4.3: <span class="mono">18 841,6 млн</span> ↔ разд. 4.8 / 7.7: <span class="mono">10 683,7 млн</span></td><td class="num">10 683,7 млн ₽</td><td><span class="bdg b-high">Средняя</span></td></tr>
+      <tr><td class="num">8</td><td>IRR в итоговом выводе</td><td>Разд. 9.3 (текст): <span class="mono">8,27%</span> ↔ разд. 9.1: <span class="mono">19,87%</span></td><td class="num">19,87% (сценарно!)</td><td><span class="bdg b-crit">Высокая</span></td></tr>
+      <tr><td class="num">9</td><td>Трудоспособные 18–59</td><td>Разд. 5.6 широкие группы: <span class="mono">31 600 (63,2%)</span> ↔ детальный срез: <span class="mono">24 900 (49,8%)</span>; слайд 7 использует 63,2%</td><td>Разделить: 31 600 — возраст; 24 900 — формальный рынок труда</td><td><span class="bdg b-high">Средняя</span></td></tr>
+      <tr><td class="num">10</td><td>Обеспечение облигаций ДОМ.РФ</td><td>Разд. 7.3: <span class="mono">90% гарантия субъекта РФ</span> ↔ разд. 9.2 / 10.5: «без гарантий региона»</td><td>Пересобрать структуру займа либо признать гарантийное условие</td><td><span class="bdg b-crit">Высокая</span></td></tr>
+      <tr><td class="num">11</td><td>ГБУ/МБУ: фиксированный доход 5%</td><td>v28 разд. 4.8: приоритетные <span class="mono">666,7 млн/год</span> ↔ Концепция 10.8: фикс. доход пайщику законом не предусмотрен; участие только с разрешения собственника</td><td>ГЧП/аренда вместо «приоритетного дохода»; пересчёт покрытия</td><td><span class="bdg b-crit">Высокая</span></td></tr>
+      <tr><td class="num">12</td><td>Число микрорайонов</td><td>Разд. 3.3: <span class="mono">~20</span> ↔ слайд 15: <span class="mono">20–25</span> ↔ 10 000 домов ÷ 400 = 25</td><td class="num">25 × 400 домов</td><td><span class="bdg b-mid">Низкая</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note warn"><div class="note-t">◆ Предложение: единый реестр значений (Single Source of Truth)</div>
+  <p>Ввести <b>«Реестр ключевых значений v1.0»</b> — один лист ФЭМ, из которого автоподстановкой формируются все таблицы текста, слайдов и Концепции. Каждое изменение — через протокол с датой и основанием (как уже делается в «Допущениях»). До выпуска реестра любые внешние презентации использовать только со сценарной оговоркой. Ответственный — проектный офис; проверка — внешний аудитор ежегодно.</p></div>
+  <div class="note ok"><div class="note-t">◆ Сильная сторона, которую нельзя потерять</div>
+  <p>Сам стиль «честных оговорок» (разд. 1.3, 9.1, 12.7, 14.10) — методологически ценен: модель прямо признаёт, что разворот IRR обеспечен наименее подтверждённой строкой. Это защищает проект от обвинений в манипуляции и должно стать стандартом коммуникации с пайщиками.</p></div>
+</section>
+
+<!-- ============ S3 ============ -->
+<section id="s3" style="--acc:var(--blue)">
+  <div class="kicker">Раздел 03 · Территория</div>
+  <h2><span class="no">03</span>Четыре площадки: карта, паспорта, земельный баланс</h2>
+  <p class="lede">Слайды дают принципиальные схемы зонирования по единому шаблону: жилая среда, общественный центр, рабочая функция, рекреация у воды, зелёный буфер, транспорт, резерв роста (21–22%). Ниже — интерактивная схема-реконструкция по координатам (не кадастровый документ) и экспертный земельный баланс.</p>
+
+  <div class="card" data-noexport style="--acc:var(--blue)">
+    <div class="w-head"><span class="w-title">Интерактивная схема · кликните на площадку</span><span class="mono" style="font-size:10px;color:var(--faint)">WGS-84 · масштаб условный</span></div>
+    <div class="map-wrap">
+      <div class="map-box">
+        <svg viewBox="0 0 1000 620" id="mapSvg" role="img" aria-label="Схема четырёх площадок Петушинского округа">
+          <defs>
+            <pattern id="forest" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.2" fill="#3E7A4E" opacity=".45"/><circle cx="10" cy="10" r="2.2" fill="#2E5A3C" opacity=".4"/></pattern>
+            <pattern id="zakaz" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#E9F3EC"/><line x1="0" y1="0" x2="0" y2="10" stroke="#2E7D46" stroke-width="2" opacity=".5"/></pattern>
+            <pattern id="gridp" width="168" height="113.6" patternUnits="userSpaceOnUse"><path d="M168 0H0V113.6" fill="none" stroke="#C9BCA2" stroke-width=".6" opacity=".55"/></pattern>
+          </defs>
+          <rect width="1000" height="620" fill="#FBF7EC"/>
+          <g id="gGrid"><rect width="1000" height="620" fill="url(#gridp)"/>
+            <text x="84" y="612" font-family="JetBrains Mono" font-size="9" fill="#8A7F6A">39.30°E</text><text x="416" y="612" font-family="JetBrains Mono" font-size="9" fill="#8A7F6A">39.50°E</text><text x="752" y="612" font-family="JetBrains Mono" font-size="9" fill="#8A7F6A">39.70°E</text>
+            <text x="6" y="66" font-family="JetBrains Mono" font-size="9" fill="#8A7F6A">56.08°N</text><text x="6" y="293" font-family="JetBrains Mono" font-size="9" fill="#8A7F6A">55.98°N</text><text x="6" y="520" font-family="JetBrains Mono" font-size="9" fill="#8A7F6A">55.88°N</text>
+            <circle cx="411" cy="138" r="82" fill="none" stroke="#B4770A" stroke-width="1.5" stroke-dasharray="6 5" opacity=".65"/><circle cx="467" cy="386" r="82" fill="none" stroke="#B4770A" stroke-width="1.5" stroke-dasharray="6 5" opacity=".65"/><circle cx="187" cy="342" r="82" fill="none" stroke="#B4770A" stroke-width="1.5" stroke-dasharray="6 5" opacity=".65"/><circle cx="803" cy="483" r="82" fill="none" stroke="#B4770A" stroke-width="1.5" stroke-dasharray="6 5" opacity=".65"/>
+            <text x="411" y="42" font-family="JetBrains Mono" font-size="9" fill="#B4770A" text-anchor="middle">контур ~3000 га</text>
+          </g>
+          <g id="gNature">
+            <path d="M60 60 Q300 20 560 70 Q760 40 950 90 L950 130 Q700 100 480 130 Q260 100 60 140 Z" fill="url(#forest)"/>
+            <path d="M60 520 Q350 480 620 540 Q800 500 950 545 L950 600 L60 600 Z" fill="url(#forest)"/>
+            <path d="M60 200 Q120 180 150 230 Q120 280 60 260 Z" fill="url(#forest)"/>
+            <ellipse cx="610" cy="487" rx="62" ry="40" fill="url(#zakaz)" stroke="#2E7D46" stroke-width="1.5"/>
+            <text x="610" y="490" font-family="JetBrains Mono" font-size="9.5" fill="#1F3D2B" text-anchor="middle">Крутовский</text><text x="610" y="502" font-family="JetBrains Mono" font-size="9.5" fill="#1F3D2B" text-anchor="middle">заказник</text>
+          </g>
+          <g id="gWater">
+            <path d="M40 462 Q200 440 360 462 Q520 486 700 460 Q850 440 960 465" fill="none" stroke="#7FB6C9" stroke-width="7" opacity=".8"/>
+            <text x="120" y="452" font-family="JetBrains Mono" font-size="10" fill="#1F5570">р. Клязьма</text>
+            <ellipse cx="448" cy="172" rx="16" ry="9" fill="#7FB6C9"/><ellipse cx="510" cy="404" rx="18" ry="10" fill="#7FB6C9"/><ellipse cx="222" cy="372" rx="13" ry="8" fill="#7FB6C9"/>
+          </g>
+          <g id="gTransport">
+            <path d="M40 430 Q300 418 520 428 Q740 438 960 424" fill="none" stroke="#C2402A" stroke-width="5"/>
+            <path d="M40 430 Q300 418 520 428 Q740 438 960 424" fill="none" stroke="#FBF7EC" stroke-width="1.2" stroke-dasharray="10 8"/>
+            <text x="880" y="416" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#9E3120">М-7</text>
+            <path d="M40 560 Q400 540 960 556" fill="none" stroke="#B4770A" stroke-width="4.5"/>
+            <text x="880" y="548" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#B4770A">М-12</text>
+            <path d="M40 398 L960 392" fill="none" stroke="#23281F" stroke-width="2.5"/>
+            <path d="M40 398 L960 392" fill="none" stroke="#FBF7EC" stroke-width="1.4" stroke-dasharray="3 9"/>
+            <text x="878" y="384" font-family="JetBrains Mono" font-size="10" fill="#23281F">Горьковская ж/д</text>
+            <rect x="325" y="391" width="14" height="8" fill="#23281F"/><rect x="610" y="388" width="14" height="8" fill="#23281F"/>
+            <circle cx="332" cy="410" r="7" fill="#1F3D2B"/><text x="332" y="428" font-family="Inter" font-size="11.5" font-weight="600" fill="#1F3D2B" text-anchor="middle">Петушки · 12,1 тыс.</text>
+            <circle cx="617" cy="404" r="6" fill="#1F3D2B"/><text x="617" y="422" font-family="Inter" font-size="11.5" font-weight="600" fill="#1F3D2B" text-anchor="middle">Костерёво · 6,9 тыс.</text>
+          </g>
+          <g class="site" data-i="0" tabindex="0" role="button" aria-label="Площадка 1"><circle class="ring" cx="411" cy="138" r="16"/><circle class="core" cx="411" cy="138" r="15"/><text x="411" y="142">1</text></g>
+          <g class="site" data-i="1" tabindex="0" role="button" aria-label="Площадка 2"><circle class="ring" cx="467" cy="386" r="16"/><circle class="core" cx="467" cy="386" r="15"/><text x="467" y="390">2</text></g>
+          <g class="site" data-i="2" tabindex="0" role="button" aria-label="Площадка 3"><circle class="ring" cx="187" cy="342" r="16"/><circle class="core" cx="187" cy="342" r="15"/><text x="187" y="346">3</text></g>
+          <g class="site" data-i="3" tabindex="0" role="button" aria-label="Площадка 4"><circle class="ring" cx="803" cy="483" r="16"/><circle class="core" cx="803" cy="483" r="15"/><text x="803" y="487">4</text></g>
+          <g transform="translate(60,570)"><rect width="264" height="4" fill="#1F3D2B"/><rect x="132" width="132" height="4" fill="#D9930D"/><text x="0" y="18" font-family="JetBrains Mono" font-size="9" fill="#6B6353">0</text><text x="126" y="18" font-family="JetBrains Mono" font-size="9" fill="#6B6353">5</text><text x="252" y="18" font-family="JetBrains Mono" font-size="9" fill="#6B6353">10 км</text></g>
+        </svg>
+        <div class="layers">
+          <label><input type="checkbox" checked data-layer="gTransport">Транспорт</label>
+          <label><input type="checkbox" checked data-layer="gWater">Гидрография</label>
+          <label><input type="checkbox" checked data-layer="gNature">Леса / ООПТ</label>
+          <label><input type="checkbox" checked data-layer="gGrid">Сетка / контуры 3000 га</label>
+        </div>
+      </div>
+      <div class="passport" id="passport" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="export-only" id="x-sites"></div>
+
+  <h3>Земельный баланс: главное несведение новых вводных</h3>
+  <p>Контуры четырёх площадок суммарно <b>~12 000 га</b> (10,4% площади округа 115 200 га). Заявленный резерв — <b>8 034 га</b> неиспользуемых сельхозугодий, но эта цифра взята из Стратегии СЭР <b>старого объединённого района</b> (58,8–61,5 тыс. чел.) — после разделения 2025 г. часть угодий могла отойти Покровскому округу. При этом 12 000 га — это не площадь застройки: первая фаза каждой площадки ~60 га (~400 домов), 25 фаз × 60 га ≈ 1 500 га урбанизированной территории. Остальное — агрооборот, лес, резерв. Баланс <i>сходится гипотетически</i>, но требует инвентаризации.</p>
+  <p class="tcap">Таблица 3.2 — Экспертная реконструкция земельного баланса программы</p>
+  <div class="tw"><table>
+    <thead><tr><th>Компонент</th><th class="num">Оценка, га</th><th>Основание и комментарий</th></tr></thead>
+    <tbody>
+      <tr><td>Усадебные участки (10 000 × 10 соток)</td><td class="num">1 000</td><td>Программа «ЖИЛЬЁ и ЗЕМЛЯ», слайд «Типы жилой застройки»</td></tr>
+      <tr><td>УДС, общественные центры, инженерия, озеленение (~40%)</td><td class="num">400–700</td><td>Единый стандарт: периметральные парковки, аллеи, дворы</td></tr>
+      <tr><td>Бизнес-кластеры и производственные зоны</td><td class="num">450–650</td><td>4 × 200–250 га кластерных зон (слайды), скорр. на фактические 86+52 объекта</td></tr>
+      <tr><td>Социальные объекты (25 микрорайонов)</td><td class="num">150–250</td><td>Сады, школы, ФАП, спорт — нормативы раздела 04</td></tr>
+      <tr><td><b>Итого урбанизировано</b></td><td class="num"><b>2 000–2 600</b></td><td>Перевод сельхоз → ИЖС/промка через генплан + КРТ (ст. 70 ГрК)</td></tr>
+      <tr><td>Агрооборот внутри контуров (сады, теплицы, поля П4)</td><td class="num">~7 000–8 000</td><td>Ядро вовлечения 8 034 га — сверить в новых границах по ЕГРН</td></tr>
+      <tr><td>Лес, ООПТ-буферы, природный каркас, резерв</td><td class="num">~1 500–2 500</td><td>Зелёные буферы слайдов; Крутовский заказник — буферная зона П4</td></tr>
+      <tr><td><b>Итого контуры</b></td><td class="num"><b>~12 000</b></td><td>Слайды: 4 × ~3 000 га. <b>Дисбаланс с 8 034 га снимается только инвентаризацией</b></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note warn"><div class="note-t">◆ Действия до утверждения площадок (этап 0)</div>
+  <ul>
+    <li>Запрос ЕГРН + данные Россельхознадзора по неиспользуемым угодьям <b>в границах нового округа</b>; кадастровая съёмка 4 контуров.</li>
+    <li>Резервирование территорий в генплане округа (в разработке с 09.2024) — окно возможностей закрывается с его утверждением.</li>
+    <li>Инженерно-геологические и гидрологические изыскания; для П4 — подтверждение статуса «старое поле» (пашня не подтверждена) и буфера заказника.</li>
+    <li>Сверка расчётной лесосеки: программа требует ~1 млн м³ деловой древесины за 20 лет (~50 тыс. м³/год) — согласование с лесничеством.</li>
+  </ul></div>
+  <div class="note ok"><div class="note-t">◆ Экспертная рекомендация: очередность площадок 3 → 1 → 2 → 4</div>
+  <p><b>П3 (Старое Аннино)</b> — стартовая: ближайшая к Москве (2–3 км до коридора), слайды прямо закрепляют за ней производственно-строительную базу первой очереди — лесопилка, ДОК, склады, техника. Это «фабрика стройки» для всех остальных площадок: себестоимость дома 4,73 млн ₽ достигается только собственной базой. <b>П1</b> — параллельный жилищный пилот 30–50 домов: близость Петушков (школа, ФАП, ж/д) снижает социальный CAPEX пилота. <b>П2</b> — фаза 2: деловой узел у М-7/ж-д, логистика. <b>П4</b> — последняя: агроусадьбы и туризм после ОВОС и подтверждения земель.</p></div>
+</section>
+
+<!-- ============ S4 ============ -->
+<section id="s4" style="--acc:var(--field)">
+  <div class="kicker">Раздел 04 · Стандарт поселения</div>
+  <h2><span class="no">04</span>Единый стандарт: «дом → двор → улица → поселение»</h2>
+  <p class="lede">Слайды формулируют тиражируемую клетку ткани: усадебный дом 1–2 этажа на участке от 10 соток → общий зелёный двор 4–6 домов с детской площадкой и гостевыми парковками → кварталы 6–12 домов → улица с абрикосовой аллеей → поселение с общественным центром. Это готовый дизайн-код и основа документа 6.19 «Стандарт поселения».</p>
+  <div class="ladder" data-noexport>
+    <div class="lad rv" style="--i:0"><b>Дом</b><span>усадьба от 10 соток, сад, огород, терраса</span></div>
+    <div class="lad rv" style="--i:1"><b>Двор</b><span>4–6 домов, общий зелёный двор, детская площадка</span></div>
+    <div class="lad rv" style="--i:2"><b>Квартал</b><span>6–12 домов, спокойные улицы 20–30 км/ч</span></div>
+    <div class="lad rv" style="--i:3"><b>Улица</b><span>цветущие аллеи, вело- и пешеходные связи</span></div>
+    <div class="lad rv" style="--i:4"><b>Поселение</b><span>общественный центр, работы, рекреация, резерв</span></div>
+  </div>
+  <p class="tcap">Таблица 4.1 — Нормативы 5–10-минутной доступности и расчёт на микрорайон 400 домов (2 000 чел.)</p>
+  <div class="tw"><table>
+    <thead><tr><th>Объект</th><th class="num">Норматив (слайды)</th><th class="num">Потребность на 2 000 чел.</th><th>Экспертный комментарий</th></tr></thead>
+    <tbody>
+      <tr><td>Парк, прогулки, свежий воздух</td><td class="num">1–3 мин</td><td class="num">зелёный двор в каждом квартале</td><td>Достижимо тканью «двор 4–6 домов»</td></tr>
+      <tr><td>Магазин, кафе</td><td class="num">3–5 мин</td><td class="num">1 торгово-сервисный узел</td><td>Первая очередь слайдов: магазин + сервисы при 4–6 домах — верно для доверия</td></tr>
+      <tr><td>Детская площадка</td><td class="num">3–5 мин</td><td class="num">1 на двор</td><td>Безопасность: нет сквозного движения через дворы</td></tr>
+      <tr><td>Детский сад</td><td class="num">5–10 мин</td><td class="num">~148 мест (0–6 лет: 7,4%)</td><td>1 сад на 150 мест или 2×75; ориентир стоимости 350–450 млн ₽ (2026)</td></tr>
+      <tr><td>Школа</td><td class="num">5–10 мин</td><td class="num">~270 учеников (7–17 лет)</td><td>Школа на 300–400 мест на 1–2 микрорайона; 700–900 млн ₽ — крупнейшая позиция соцCAPEX</td></tr>
+      <tr><td>Медицинский пункт</td><td class="num">5–10 мин</td><td class="num">1 ФАП / ВОП</td><td>Кадровый дефицит: связка с «Земским доктором» и телемедициной</td></tr>
+      <tr><td>Спорт</td><td class="num">5–10 мин</td><td class="num">площадка + маршруты</td><td>ФОК на 2–3 микрорайона; показатель Указа №1014 п. 6</td></tr>
+      <tr><td>Общественный центр</td><td class="num">1–3 мин до ядра</td><td class="num">парк, площадь, клуб, кафе, сервисы</td><td>Компактный центр связывает жилую и рабочую зоны (П2)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><div class="note-t">◆ Три уточнения к стандарту</div>
+  <ul>
+    <li><b>Абрикосовые аллеи</b> во Владимирской области (зона зимостойкости 4) — агрономический риск: закладывать зимостойкие сорта (прививка на абрикос маньчжурский) либо трактовать как цветографический код бренда с дублированием липой/рябиной. Иначе — гибель аллей в первую же суровую зиму и репутационный удар.</li>
+    <li><b>Парковки по периметру</b>: норматив 1,2–1,5 машиноместа/дом + гостевые — проверить ширину периметральных карманов; двухуровневый паркинг из слайдов для села избыточен.</li>
+    <li><b>Пожарные проезды и СНиП</b>: дворы без сквозного движения требуют разворотных площадок и проездов ≥3,5 м — заложить в стандарт до эскизов.</li>
+  </ul></div>
+</section>
+
+<!-- ============ S5 ============ -->
+<section id="s5" style="--acc:var(--amber)">
+  <div class="kicker">Раздел 05 · Экономика</div>
+  <h2><span class="no">05</span>Финансовая модель: сценарии и цена оптимизма</h2>
+  <p class="lede">Главный урок истории IRR: <b>результат модели определяется не средними допущениями, а одной строкой</b>. Переключите сценарий — и увидите, как меняется вердикт. Барьерная ставка 12% сама по себе занижена относительно рыночной стоимости капитала 2026 года.</p>
+
+  <div class="card" data-noexport style="--acc:var(--amber)">
+    <div class="w-head"><span class="w-title">Сценарный переключатель · данные ФЭМ v28</span></div>
+    <div class="scn-tabs" id="scnTabs">
+      <button class="scn-tab" data-s="base"><span class="st">Базовый · без разд. 14</span><span class="ss">Только подтверждённые корректировки (9.1, 11, 12.1, 13)</span></button>
+      <button class="scn-tab on" data-s="model"><span class="st">Модельный · оптимистичный</span><span class="ss">Разд. 14 + ТОР (15) + ЕСХН-контур СПоК (16)</span></button>
+      <button class="scn-tab" data-s="real"><span class="st">Реалистичный · 40–70%</span><span class="ss">Частичное выполнение целевых (разд. 12.7) — экспертная оценка</span></button>
+    </div>
+    <div class="scn-kpis">
+      <div class="sk"><div class="v" id="kIrr">19,87%</div><div class="l">IRR</div></div>
+      <div class="sk"><div class="v" id="kNpv">+7 942,6</div><div class="l">NPV, млн ₽</div></div>
+      <div class="sk"><div class="v" id="kPi">1,35</div><div class="l">PI</div></div>
+      <div class="sk"><div class="v" id="kPay">12 / 15</div><div class="l">окуп., лет прост./диск.</div></div>
+      <div class="sk"><div class="v" id="kCov">95,3%</div><div class="l">покрытие платежа</div></div>
+    </div>
+    <svg viewBox="0 0 660 250" style="width:100%;height:auto" aria-label="Сравнение IRR по стадиям уточнения модели">
+      <rect x="70" y="30" width="560" height="170" fill="#FBF7EC"/>
+      <rect x="70" y="45.5" width="560" height="30.9" fill="#2E6E8E" opacity=".1"/>
+      <text x="636" y="52" font-family="JetBrains Mono" font-size="9" fill="#1F5570" text-anchor="end">рыночная стоимость капитала 16–20%</text>
+      <g font-family="JetBrains Mono" font-size="9" fill="#8A7F6A">
+        <text x="60" y="203" text-anchor="end">0%</text><text x="60" y="126" text-anchor="end">10%</text><text x="60" y="49" text-anchor="end">20%</text>
+        <line x1="70" y1="200" x2="630" y2="200" stroke="#C9BCA2"/><line x1="70" y1="123" x2="630" y2="123" stroke="#C9BCA2" stroke-dasharray="2 4"/><line x1="70" y1="46" x2="630" y2="46" stroke="#C9BCA2" stroke-dasharray="2 4"/>
+      </g>
+      <line x1="70" y1="107.6" x2="630" y2="107.6" stroke="#C2402A" stroke-width="1.6" stroke-dasharray="7 5"/>
+      <text x="76" y="103" font-family="JetBrains Mono" font-size="9.5" fill="#9E3120">барьер модели 12%</text>
+      <g id="irrBars">
+        <g class="ibar" data-b="base"><rect x="95" y="127.2" width="86" height="72.8" rx="4" fill="#C2402A" opacity=".85"/><text x="138" y="120" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#9E3120">9,45</text><text x="138" y="216" text-anchor="middle" font-family="Inter" font-size="10" fill="#6B6353">без 14</text></g>
+        <g class="ibar" data-b="s14"><rect x="205" y="58.1" width="86" height="141.9" rx="4" fill="#B4770A"/><text x="248" y="51" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#B4770A">18,43</text><text x="248" y="216" text-anchor="middle" font-family="Inter" font-size="10" fill="#6B6353">+ разд.14</text></g>
+        <g class="ibar" data-b="tor"><rect x="315" y="50.6" width="86" height="149.4" rx="4" fill="#C9A227"/><text x="358" y="43" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#B4770A">19,40</text><text x="358" y="216" text-anchor="middle" font-family="Inter" font-size="10" fill="#6B6353">+ ТОР</text></g>
+        <g class="ibar" data-b="model"><rect x="425" y="47" width="86" height="153" rx="4" fill="#3E7A4E"/><text x="468" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#1F3D2B">19,87</text><text x="468" y="216" text-anchor="middle" font-family="Inter" font-size="10" fill="#6B6353">+ ЕСХН</text></g>
+        <g class="ibar" data-b="real"><rect x="535" y="92.2" width="86" height="107.8" rx="4" fill="none" stroke="#2E6E8E" stroke-width="2" stroke-dasharray="5 4"/><rect x="535" y="115.3" width="86" height="84.7" rx="4" fill="#2E6E8E" opacity=".35"/><text x="578" y="85" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#1F5570">11–14*</text><text x="578" y="216" text-anchor="middle" font-family="Inter" font-size="10" fill="#6B6353">40–70%*</text></g>
+      </g>
+      <text x="630" y="240" text-anchor="end" font-family="Inter" font-size="9" fill="#8A7F6A">* экспертная оценка при частичном выполнении целевых (разд. 12.7)</text>
+    </svg>
+    <div class="scn-note" id="scnNote"></div>
+  </div>
+  <div class="export-only" id="x-scen"></div>
+
+  <h3>Эволюция IRR: 11 уточнений за 5 дней</h3>
+  <div class="irr-strip" data-noexport>
+    <span class="is bad">86,2%</span><span class="ar">→</span><span class="is">17,32</span><span class="ar">→</span><span class="is bad">1,36</span><span class="ar">→</span><span class="is">6,81</span><span class="ar">→</span><span class="is">8,27</span><span class="ar">→</span><span class="is">8,48</span><span class="ar">→</span><span class="is">9,00</span><span class="ar">→</span><span class="is">9,45</span><span class="ar">→</span><span class="is">18,43</span><span class="ar">→</span><span class="is">19,40</span><span class="ar">→</span><span class="is good">19,87%</span>
+  </div>
+  <p>Падение 86,2% → 1,36% — исправление заниженного CAPEX и переход на 100% паевого капитала; подъём 9,45% → 19,87% — три административно-рыночных допущения. <b>Ключевой факт:</b> прирост от разд. 14 (+8,98 п.п.) больше, чем от всех остальных уточнений вместе взятых (+1,18 п.п. после пересчёта базы). Модель сама рекомендует пилотную партию 10–20 домокомплектов до инвестиционных решений — это следует сделать блокирующим условием.</p>
+
+  <p class="tcap">Таблица 5.1 — Структура CAPEX и источники (унифицировано по ред. 31.08.2026)</p>
+  <div class="tw"><table>
+    <thead><tr><th>Блок</th><th class="num">CAPEX, млрд ₽</th><th>Источники</th><th>Уязвимость</th></tr></thead>
+    <tbody>
+      <tr><td>Жильё (10 000 домов × 4,734 млн)</td><td class="num">47,34</td><td>5% собственные (486,7 тыс.) + КРСТ ~8% (378,7 тыс. средневзв.) + заём/«Сельская ипотека» 87%</td><td>Адресность КРСТ (~40% семей) и СИ (АПК/соцсфера/СВО); квоты региона</td></tr>
+      <tr><td>Инфраструктура и соцобъекты</td><td class="num">17,33</td><td>Паи домохозяйств + облигации ДОМ.РФ 9,28% + КРСТ 4,64%</td><td><b>Экспертно занижен на 30–60%</b> (раздел 09); гарантия региона 90% для ДОМ.РФ</td></tr>
+      <tr><td>Бизнес-кластеры (1 566 объектов)</td><td class="num">57,39</td><td>Пай бизнеса 25 млрд (15% + 10 траншей по 2,125 млрд) + паи домохозяйств (инфраструктурно-бизнес-часть 5 млн/пай)</td><td>Привлечение 25 млрд от 1 566 субъектов (в среднем ~16 млн) — амбициозно</td></tr>
+      <tr><td><b>Итого</b></td><td class="num"><b>122,05</b></td><td>Госучастие: КРСТ 7,25 млрд безвозвратно + ДОМ.РФ 6,93 млрд возвратно + лес 2,66 млрд экономии</td><td>Мультипликатор 7,06 — только при полной реализации</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note risk"><div class="note-t">◆ Разд. 14 — цена оптимизма в цифрах</div>
+  <ul>
+    <li>Заявленная себестоимость <b>50 тыс ₽/м²</b> «под ключ» с элитным декором (пилястры, колонны, стеклофибробетон) ниже рыночной отделки <i>обычного</i> дома по той же технологии (55–73 тыс ₽/м²); элитная отделка — от 125 тыс ₽/м².</li>
+    <li>Маржа 100% к себестоимости против 9,8% рентабельности строительных организаций РФ (Росстат-2024) и 25–35% у малых подрядчиков ИЖС.</li>
+    <li>500 элитных коттеджей/год по 20 млн ₽ — заметная доля всего российского рынка элитного ИЖС; производственная мощность ≠ спрос.</li>
+    <li><b>Вердикт:</b> исключить из базового сценария; пилот 10–20 шт + независимое маркетинговое исследование до любой коммуникации пайщикам.</li>
+  </ul></div>
+  <div class="note warn"><div class="note-t">◆ Барьерная ставка 12% занижена</div>
+  <p>При двузначной ключевой ставке 2026 года рыночная стоимость капитала — 16–20%+. IRR 19,87% лишь边际но покрывает верхнюю границу; при ставке дисконтирования 16% NPV модельного сценария сжимается примерно до +2…3 млрд, при 18% — около нуля. <b>Рекомендация:</b> барьер = ключевая ставка + 3–5 п.п., стресс-тесты 16/18/20% обязательны в ФЭМ. ЕСХН-контур СПоК (≥70% профильной выручки) — единственная из трёх «новых льгот», не требующая внешних решений: её следует реализовать первой.</p></div>
+</section>
+
+<!-- ============ S6 ============ -->
+<section id="s6" style="--acc:var(--blue2)">
+  <div class="kicker">Раздел 06 · Жильё</div>
+  <h2><span class="no">06</span>Жильё: анатомия покрытия 95,28%</h2>
+  <p class="lede">Пай домохозяйства 9 734 000 ₽ = дом 4 734 000 + инфраструктура/бизнес 5 000 000. Заём 8 868 580 ₽ под 3% на 20 лет → аннуитет ≈49 185 ₽/мес; доля прибыли кооператива ≈46 863 ₽/мес покрывает 95,28%. Но эта доля — <b>следствие полной мощности бизнес-контура, включая разд. 14</b>, и наступает через 12–15 лет, а платить нужно с первого месяца. Проверьте чувствительность сами:</p>
+
+  <div class="card" data-noexport style="--acc:var(--blue)">
+    <div class="w-head"><span class="w-title">Калькулятор покрытия платежа · живой расчёт</span></div>
+    <div class="calc">
+      <div class="c-inputs">
+        <div class="ci"><label>Собственные средства при вступлении <output id="oOwn">5% · 486 700 ₽</output></label><input type="range" id="cOwn" min="0" max="30" step="1" value="5"></div>
+        <div class="ci"><label>Соцвыплата КРСТ (средневзвешенная) <output id="oKrst">378 720 ₽</output></label><input type="range" id="cKrst" min="0" max="1500000" step="10000" value="378720"></div>
+        <div class="ci"><label>Ставка по займу, % годовых <output id="oRate">3,0%</output></label><input type="range" id="cRate" min="0.1" max="20" step="0.1" value="3"></div>
+        <div class="ci"><label>Срок займа, лет <output id="oYears">20</output></label><input type="range" id="cYears" min="5" max="25" step="1" value="20"></div>
+        <div class="ci"><label>Доля прибыли кооператива, ₽/мес <output id="oShare">46 863 ₽</output></label><input type="range" id="cShare" min="0" max="60000" step="500" value="46863"></div>
+        <div class="presets">
+          <button data-preset="model">Модель 3%</button>
+          <button data-preset="no14">Без разд. 14</button>
+          <button data-preset="market">Рынок 18%</button>
+          <button data-preset="ramp">Раскрутка (годы 1–5)</button>
+        </div>
+      </div>
+      <div class="c-out">
+        <div class="co-row"><span>Сумма займа</span><b id="rLoan">8 868 580 ₽</b></div>
+        <div class="co-row"><span>Аннуитетный платёж</span><b id="rPay">49 185 ₽/мес</b></div>
+        <div class="co-row"><span>Личный платёж семьи</span><b id="rPersonal">2 322 ₽/мес</b></div>
+        <div><span style="font-size:12px;color:#C9C2B0">Покрытие доли прибылью</span>
+          <div class="cov-t" id="rCov">95,3<small> %</small></div>
+          <div class="gauge"><i id="rGauge"></i></div>
+        </div>
+        <p style="font-size:11px;color:#A8B8A0;margin:0" id="rHint">Модельный сценарий на полной мощности (год 12+). В годы раскрутки покрытие существенно ниже — нужен резервный фонд платежей.</p>
+      </div>
+    </div>
+  </div>
+  <div class="export-only">
+    <p class="tcap">Таблица 6.1 — Чувствительность покрытия (аннуитет, заём = пай − собственные − КРСТ)</p>
+    <div class="tw"><table>
+      <thead><tr><th>Сценарий</th><th class="num">Заём, ₽</th><th class="num">Платёж, ₽/мес</th><th class="num">Доля прибыли</th><th class="num">Покрытие</th></tr></thead>
+      <tbody>
+        <tr><td>Модель: 5% + КРСТ 378,7 тыс., 3%, 20 лет</td><td class="num">8 868 580</td><td class="num">49 185</td><td class="num">46 863</td><td class="num">95,3%</td></tr>
+        <tr><td>Без разд. 14 (доля ≈26,6 тыс.)</td><td class="num">8 868 580</td><td class="num">49 185</td><td class="num">≈26 560</td><td class="num">≈54%</td></tr>
+        <tr><td>Рыночная ставка 18%, 20% взнос, без КРСТ</td><td class="num">7 787 200</td><td class="num">≈120 160</td><td class="num">46 863</td><td class="num">≈39%</td></tr>
+        <tr><td>Годы раскрутки 1–5 (доля ≈12 тыс.)</td><td class="num">8 868 580</td><td class="num">49 185</td><td class="num">12 000</td><td class="num">≈24%</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="note risk"><div class="note-t">◆ Четыре правовых условия до приёма средств (Концепция, разд. 10 — исполнить)</div>
+  <ul>
+    <li><b>Эскроу в ИЖС:</b> с 01.03.2025 договоры строительного подряда ИЖС с гражданами — через счета эскроу (ФЗ №186-ФЗ от 22.07.2024). Схема «хозспособ Общества + продажа готового дома» может обойти подряд-эскроу, но требует письменного юрзаключения; слайд «ПКИЗ» и схема «инвест-банк 15/85» должны быть приведены к единой правовой конструкции с Концепцией.</li>
+    <li><b>ЖСК:</b> средства граждан на дома в малоэтажных комплексах — только 214-ФЗ (эскроу) либо ЖСК на участке в безвозмездном срочном пользовании из публичной собственности (ч. 2.1-1 ст. 1 214-ФЗ). Выбор — до утверждения положения 6.08.</li>
+    <li><b>Кооперативные выплаты ≤20% доходов</b> (ст. 24 Закона №3085-1) и НДФЛ: «погашение из прибыли» — не гарантия; в договорах с пайщиками прямо указать личный платёж и сценарии.</li>
+    <li><b>ГБУ/МБУ:</b> «приоритетный доход 5%» (666,7 млн/год) из v28 несовместим с правовой адаптацией Концепции — заменить на ГЧП/аренду соцобъектов; пересчитать покрытие без этой приоритетной выплаты.</li>
+  </ul></div>
+  <div class="note warn"><div class="note-t">◆ Квота КРСТ — узкое горлышко</div>
+  <p>Федеральный бюджет КРСТ ~108 млрд ₽/год на всю страну. Потребность проекта — 7,25 млрд за 20 лет (~363 млн/год) выглядит скромно, но соцвыплата на жильё адресна (работники АПК/соцсферы, молодые специалисты, многодетные) и распределяется через квоту региона. При потоке 1 000 семей/год очередь Владимирской области станет бутылочным горлышком. <b>Действие:</b> официальный запрос в Минсельхоз области о ёмкости квоты на 2027–2030; в ФЭМ заложить сценарий «КРСТ = 0».</p></div>
+</section>
+
+<!-- ============ S7 ============ -->
+<section id="s7" style="--acc:var(--gold)">
+  <div class="kicker">Раздел 07 · Демография</div>
+  <h2><span class="no">07</span>Демография: два контура и цена программы «Кормилец»</h2>
+  <p class="lede">Миграционный контур (50 000 переселенцев = 2 500 чел/год) и собственный контур рождаемости (+15 255 за 20 лет) — амбициозны на фоне СКР Владимирской области ≈1,06 и убыли −17,9‰ в округе. Программа «Родился кормилец, а не потребитель» — сильнейшая социальная идея проекта и одновременно его крупнейшее необеспеченное обязательство.</p>
+
+  <p class="tcap">Таблица 7.1 — Рост населения округа по контрольным точкам (v28, 2.9)</p>
+  <div class="tw"><table>
+    <thead><tr><th>Год</th><th class="num">Мигранты (накопл.)</th><th class="num">Рождения по программе</th><th class="num">Население округа</th><th class="num">Δ к миграционному плану</th></tr></thead>
+    <tbody>
+      <tr><td>2027</td><td class="num">1 000</td><td class="num">30</td><td class="num">28 043</td><td class="num">+30</td></tr>
+      <tr><td>2031</td><td class="num">10 000</td><td class="num">750</td><td class="num">37 763</td><td class="num">+750</td></tr>
+      <tr><td>2036</td><td class="num">31 500</td><td class="num">4 185</td><td class="num">62 698</td><td class="num">+4 185</td></tr>
+      <tr><td>2041</td><td class="num">45 500</td><td class="num">10 035</td><td class="num">82 548</td><td class="num">+10 035</td></tr>
+      <tr><td>2046</td><td class="num">50 000</td><td class="num">15 255</td><td class="num">92 268</td><td class="num">+15 255</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="card" data-noexport style="--acc:var(--gold)">
+    <div class="w-head"><span class="w-title">Нагрузка программы на бюджет кооператива</span>
+      <label style="display:flex;gap:8px;align-items:center;font-size:12.5px;cursor:pointer"><input type="checkbox" id="demoTgl" checked style="accent-color:var(--amber)">Программа «Кормилец» включена</label>
+    </div>
+    <div class="grid3">
+      <div class="sk"><div class="v">3,65 <small style="font-size:13px">млн ₽</small></div><div class="l">обязательство на 1 ребёнка</div></div>
+      <div class="sk"><div class="v" id="dTotal">44,2 <small style="font-size:13px">млрд ₽</small></div><div class="l">совокупно за 20 лет</div></div>
+      <div class="sk"><div class="v" id="dPeak">3,84 <small style="font-size:13px">млрд/год</small></div><div class="l">пик нагрузки (2043)</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:12px" id="dBurden">Пик = <b>26%</b> модельного EBIT (15,0 млрд) — но <b>38%</b> базового EBIT без разд. 14 (10,0 млрд). Хвост взносов на счета детей продолжается до <b>38-го года модели</b> — вдвое дольше горизонта ФЭМ.</p>
+  </div>
+  <div class="export-only" id="x-demo"></div>
+
+  <div class="note risk"><div class="note-t">◆ Актуарная критика программы</div>
+  <ul>
+    <li><b>Не в ФЭМ:</b> v28 прямо признаёт — расходы не интегрированы каскадом по листам модели. Полный пересчёт обязателен до утверждения программы Общим собранием.</li>
+    <li><b>Компенсация зарплаты 3 года × 70 тыс ₽</b> предполагает формальную занятость родителя в организации кооператива; для самозанятых/фермеров механизм не определён. НДФЛ и страховые взносы на компенсацию — налоговая экспертиза.</li>
+    <li><b>Отбор и моральный риск:</b> щедрость программы может привлечь семьи ради выплат без намерения участвовать в хозяйственной деятельности; Концепция верно запрещает выплаты «за факт проживания» — нужен стаж участия (например, ≥2 года) и vesting по счёту ребёнка.</li>
+    <li><b>Финансовый хвост:</b> счёт ребёнка, рождённого в 2046, пополняется до 2064. Обеспечение — только целевой актуарный фонд с нормативом достаточности, а не текущий доход года.</li>
+    <li><b>Рекомендация:</b> старт не ранее 2030 г. при фонде ≥15 млрд ₽ или страховом партнёре; пилот на 100–200 семей с ограниченным обязательством; ежегодный актуарный пересчёт.</li>
+  </ul></div>
+  <div class="note warn"><div class="note-t">◆ Расхождение демографического среза</div>
+  <p>Широкие группы 18–59 дают <b>31 600 чел. (63,2%)</b>, детальный срез «активной рабочей силы» — <b>24 900 (49,8%)</b>; разница 6 700 отнесена к «вне формального рынка труда». Слайд 7 транслирует 63,2% как базу 25 455 рабочих мест. Для планирования соцобъектов и трудобаланса использовать <b>обе метрики раздельно</b>: возрастная численность — для школ/садов, формальная занятость — для вакансий. Иначе план мест завышен на ~27%.</p></div>
+  <h3>Воронка переселения: пилотная волна (экспертные целевые)</h3>
+  <p class="tcap">Таблица 7.2 — Воронка привлечения на пилот 400 домов</p>
+  <div class="tw"><table>
+    <thead><tr><th>Стадия</th><th class="num">Целевой объём</th><th class="num">Конверсия</th><th>Инструмент</th></tr></thead>
+    <tbody>
+      <tr><td>Охват (Москва/МО, удалённые работники, предпенсионеры)</td><td class="num">40 000</td><td class="num">—</td><td>Цифровое сообщество, открытые дни, «одно окно» с АНО «Путь домой»</td></tr>
+      <tr><td>Заявки / консультации</td><td class="num">4 000</td><td class="num">10%</td><td>Лендинг программы, калькулятор пая, экскурсии на П3/П1</td></tr>
+      <tr><td>Предварительные договоры + трудоустройство</td><td class="num">1 200</td><td class="num">30%</td><td>Вакансии АПК/соцсферы ДО приёма пая (доступ к СИ ≥60–70%)</td></tr>
+      <tr><td>Паи и заселение</td><td class="num">400</td><td class="num">33%</td><td>Эскроу-схема, ипотека, адаптационное сопровождение</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ============ S8 ============ -->
+<section id="s8" style="--acc:var(--pine2)">
+  <div class="kicker">Раздел 08 · Производство</div>
+  <h2><span class="no">08</span>Производство и кадры: ДСК-ядро и синергия площадки 3</h2>
+  <p class="lede">Каталог 1 566 субъектов включает 86 объектов 7 высокотехнологичных кластеров (49% бизнес-CAPEX, 41,9% EBIT) и 52 объекта агротуризма/добычи. Новое в слайдах — <b>производственно-строительная база П3 как двигатель всей программы</b>: лесопилка и деревообработка первой очереди замыкают цепочку «льготный лес → домокомплекты → стройка → щепа → локальная генерация».</p>
+  <p class="tcap">Таблица 8.1 — Производственные контуры: реализуемость и очередность</p>
+  <div class="tw"><table>
+    <thead><tr><th>Контур</th><th class="num">Объектов / мест</th><th class="num">CAPEX</th><th>Очередь и условие запуска</th></tr></thead>
+    <tbody>
+      <tr><td><b>ДСК-цепочка П3</b>: домостроительный комбинат, стеклофибробетон, окна, ДОК + лесопилка</td><td class="num">4+ / —</td><td class="num">в составе 57,4 млрд</td><td><b>Очередь 1 (2027–2029).</b> Пилотная партия 10–20 домокомплектов; ТОР-заявка; сбыт пайщикам гарантирован, внешний элитный рынок — только после подтверждения</td></tr>
+      <tr><td>Переработка АПК (сыроварни, маслобойня, мельница, консервация)</td><td class="num">40 / 400</td><td class="num">3,8 млрд</td><td>Очередь 1–2. СПоК на ЕСХН 6%; спрос пайщиков через «стол заказов»; ≥50% работ для членов (ст. 4 ФЗ-193)</td></tr>
+      <tr><td>Стройхимия, полимеры, композиты</td><td class="num">8 / 320</td><td class="num">2,8 млрд</td><td>Очередь 2. Спрос собственной стройки 500–800 домов/год</td></tr>
+      <tr><td>Климатическое/инженерное оборудование, робототехника, 3D</td><td class="num">29 / 1 380</td><td class="num">5,3 млрд</td><td>Очередь 2–3. Кадры: дуальное образование с ВлГУ/колледжами; контракты Росатома — маржа 25% принята заказчиком, не измерена</td></tr>
+      <tr><td>Фармацевтика и биопроизводство</td><td class="num">3 / 390</td><td class="num">2,93 млрд</td><td>Очередь 3 (2035+). GMP, лицензирование 5–7 лет; «Генериум» теперь в Покрове — кадровый мост через соглашение двух округов</td></tr>
+      <tr><td>Малотоннажная химия</td><td class="num">6 / 330</td><td class="num">4,2 млрд</td><td>Очередь 3. Экологические ограничения, ОВОС; импортозамещение реагентов</td></tr>
+      <tr><td>Агротуризм «Богдарня» + добыча (вода, сыпучие)</td><td class="num">52 / 687</td><td class="num">1,81 млрд</td><td>П4 — очередь 2–3 после ОВОС; карьеры — лицензии и геология; действующая «Богдарня» — модельный референс</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note ok"><div class="note-t">◆ Синергия П3: энергетический замыкатель</div>
+  <p>Отходы лесопилки и ДОК (щепа, опил) → котельная/газогенерация 5–10 МВт → тепло и электроэнергия стройбазы и первых микрорайонов; навоз мини-ферм → удобрения теплиц П4; сыворотка сыроварни → корма. Это реализация тезиса 6.2 о замкнутых цепочках и местного энергоблока. <b>Действие:</b> энергобаланс площадок в инвестплан (2.05) до проектирования сетей — иначе переплата за присоединение к внешним сетям.</p></div>
+  <div class="note risk"><div class="note-t">◆ Двойная нагрузка на ДСК и трудобаланс</div>
+  <ul>
+    <li>Пиковый ввод по S-кривой ~700–800 пайных домов/год + 500–1 000 внешних домокомплектов = <b>1 200–1 800 единиц/год</b> — две производственные линии и 1 500–2 000 строителей на пике. Артель (производственный кооператив) + дуальное образование + миграционные квоты — планировать с 2027.</li>
+    <li>25 455 мест ≈ 80% возрастной группы 18–59 переселенцев (31 600) и &gt;100% формально занятых (24 900). Нулевой кадровый резерв: вакансии должны <b>следовать за заселением с лагом ≤20%</b>, иначе бизнес не выйдет на мощность → покрытие платежа упадёт → спираль недоверия. Маятниковый приток из Покрова/Собинки и удалёнка — обязательные компенсирующие каналы.</li>
+  </ul></div>
+</section>
+
+<!-- ============ S9 ============ -->
+<section id="s9" style="--acc:var(--field)">
+  <div class="kicker">Раздел 09 · Инфраструктура и экология</div>
+  <h2><span class="no">09</span>Инфраструктура: базовая сеть округа и цена соцобъектов</h2>
+  <p class="lede">Исходное состояние: 54% местных дорог без твёрдого покрытия, 63,9% не отвечают нормативам; газификация сельской местности 44,4% (66 из 155 НП). Инфраструктурный CAPEX 17,33 млрд на 25 микрорайонов = ~693 млн/микрорайон — при рыночной стоимости школ и садов 2026 года это выглядит заниженным.</p>
+  <p class="tcap">Таблица 9.1 — Экспертная проверка инфраструктурного CAPEX (цены 2026, диапазоны)</p>
+  <div class="tw"><table>
+    <thead><tr><th>Позиция</th><th class="num">Модель (17,33 млрд)</th><th class="num">Экспертная оценка</th><th>Основание</th></tr></thead>
+    <tbody>
+      <tr><td>Детские сады: ~3 700 мест (0–6 лет) → 25 × 150 мест</td><td class="num" rowspan="4">≈693 млн на микрорайон «всё включено»</td><td class="num">8,8–11,3 млрд</td><td>Аналог КРСТ: сад 240 мест = 475,6 млн (Лушниковка) → ~2,0 млн/место</td></tr>
+      <tr><td>Школы: ~6 750 учеников → 10–12 школ × 500–600 мест</td><td class="num">8,0–11,0 млрд</td><td>1,6–1,9 млн/место в малоэтажном исполнении 2026</td></tr>
+      <tr><td>ФАП/ВОП, поликлиника, спорт, культура</td><td class="num">2,0–3,0 млрд</td><td>25 ФАП × 40–60 млн + ФОК и ДК</td></tr>
+      <tr><td>Сети и дороги микрорайонов + модернизация базовой сети округа</td><td class="num">8,0–12,0 млрд</td><td>25 × 300–450 млн + газ/дороги существующих НП (7.6)</td></tr>
+      <tr><td><b>Итого</b></td><td class="num"><b>17,33 млрд</b></td><td class="num"><b>26,8–37,3 млрд</b></td><td><b>Разрыв 1,5–2,2×</b> → пересчёт по ФЕР/ТЕР с индексацией; школы/сады — по линии КРСТ и нацпроектов, не только паи</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note warn"><div class="note-t">◆ Как закрыть разрыв, не убивая модель</div>
+  <ul>
+    <li>Соцобъекты — заявками в федеральные программы («Инфраструктура для жизни», модернизация школ, ФАПы) — это <b>не паевой</b> CAPEX; Концепция уже допускает ГЧП и соглашения.</li>
+    <li>Школы укрупнённо на 2–3 микрорайона (полицентризм слайдов позволяет), сады — в первые этажи общественных центров.</li>
+    <li>Поэтапные ФАП → врачебная амбулатория на кластер; телемедицина как мост до постройки.</li>
+    <li>Индексация смет 8–12%/год на 20 лет: модель в постоянных ценах должна иметь номинальный сценарий — иначе «удорожание» станет перманентным кризисом.</li>
+  </ul></div>
+  <div class="note"><div class="note-t">◆ Экологический контур</div>
+  <ul>
+    <li>ОВОС по ст. 32 ФЗ-7 на каждой из 4 площадок до эскизов; для П4 — буферная зона Крутовского заказника (~7 км) и подтверждение статуса поля.</li>
+    <li>Водоснабжение: подземные источники + ВЗУ; очистные с выпуском, не затрагивающим Клязьму (рыбохозяйственная категория) — локальные очистные замкнутого цикла.</li>
+    <li>Лесобаланс: 1 млн м³ льготной древесины за 20 лет против расчётной лесоски округа — письменное согласование с департаментом лесного хозяйства; при дефиците — частичный переход на закупку у соседних регионов с потерей части экономии 266 тыс/дом.</li>
+    <li>Площадки 1–3 — распаханные поля на возвышенностях вне поймы: сильная сторона выбора; мелиорация заросших угодий (кустарник) — 40–80 тыс ₽/га, заложить в CAPEX агрооборота.</li>
+  </ul></div>
+</section>
+
+<!-- ============ S10 ============ -->
+<section id="s10" style="--acc:var(--blue)">
+  <div class="kicker">Раздел 10 · Право и управление</div>
+  <h2><span class="no">10</span>Право и управление: Концепция впереди мастер-плана</h2>
+  <p class="lede">Концепция 2.01 (сентябрь) юридически адаптировала 23 спорных положения источников; мастер-план v28 (август) часть из них всё ещё содержит в исходном виде. Документы нужно синхронизировать <b>в сторону Концепции</b> — она правово более зрелая.</p>
+  <p class="tcap">Таблица 10.1 — Ключевые правовые развилки и рекомендуемая конструкция</p>
+  <div class="tw"><table>
+    <thead><tr><th>Развилка</th><th>v28 / слайды</th><th>Концепция / закон</th><th>Рекомендация</th></tr></thead>
+    <tbody>
+      <tr><td>ГБУ/МБУ в капитале</td><td>Имущественный пай 13,33 млрд + фикс. 5% доход</td><td>10.8: только с разрешения собственника; фикс. доход пайщику не предусмотрен</td><td>ГЧП/концессия/аренда соцобъектов; исключить «приоритетный доход» из ФЭМ</td></tr>
+      <tr><td>Ассоциированное членство с ограниченным голосом</td><td>Разд. 4.2 v28</td><td>10.2: один пайщик — один голос</td><td>Бизнес — полноправные пайщики-юрлица; инвесторы — через проектные ООО/АО</td></tr>
+      <tr><td>Земля без торгов через МБУ</td><td>Разд. 14.5 (АС)</td><td>10.12: п. 1–2 ст. 39.6 ЗК; КРТ ст. 70 ГрК</td><td>КРТ по инициативе правообладателей + генплан; АС-механизм — только после юрэкспертизы</td></tr>
+      <tr><td>ПКИЗ / «инвест-банк 15/85»</td><td>Слайды 3–4 презентации</td><td>186-ФЗ (эскроу ИЖС с 01.03.2025), 214-ФЗ</td><td>Единая схема: Общество-застройщик (хозспособ → продажа) либо подряд с эскроу; юрзаключение до приёма средств</td></tr>
+      <tr><td>Привлечение пайщиков как «участие»</td><td>Образец устава ПК «Регион» (АС)</td><td>10.22: ст. 14.62 КоАП / 172.2 УК — пирамида</td><td>Оплата информирования — фикс, не % от привлечённых; постоянный комплаенс</td></tr>
+      <tr><td>Внутренние расчётные единицы</td><td>Чартаев/Чернышев</td><td>10.13: ст. 27 Закона о ЦБ — суррогаты запрещены</td><td>Паевой счёт — только рублёвый учёт; КТУ — управленческий, не платёжный</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Управленческая ёмкость: проектный офис и центр компетенций</h3>
+  <ul>
+    <li><b>Проектный офис 12–15 чел.</b> на этапе 0: руководитель (опыт проектов ≥10 млрд), финансы/ФЭМ, земля/ЕГРН, право, стройка/ТИМ, АПК/СПоК, маркетинг переселения, GR, комплаенс/аудит. Фонд оплаты — норматив от дохода (≤5% по АС), на старте — целевой взнос учредителей и грант института развития.</li>
+    <li><b>Целевой центр компетенций</b> по Приказу Минэкономразвития №746 от 11.11.2025 — формальная регистрация переводит проект из частной инициативы в признанную федеральную рамку и открывает синхронизацию с нацпроектом «Инфраструктура для жизни».</li>
+    <li><b>Статус «нового экспериментального населённого пункта»</b> (Стратегия 4146-р) — обращение в Правительство области; критерий 30–50 тыс. жителей проект перекрывает (92 тыс. к 2046).</li>
+    <li><b>Совет — 5 лет</b>, ревизионная комиссия + внешний аудит ежегодно, согласительные комиссии, положение о конфликте интересов — принять пакетом этапа 0 (документы 3.04–3.17 Концепции).</li>
+    <li><b>Система «АС»</b> — держать как резервный контур для 1–2 проектов с региональным институтом развития; не создавать параллельное управление территорией.</li>
+  </ul>
+</section>
+
+<!-- ============ S11 ============ -->
+<section id="s11" style="--acc:var(--pine)">
+  <div class="kicker">Раздел 11 · Политика</div>
+  <h2><span class="no">11</span>Указ №1014: 17/21 закрыто, 4 пробела — 4 модуля</h2>
+  <p class="lede">Проект — практический инструмент действующих госпрограмм (КРСТ области, Стратегия СЭР округа) и даёт вклад по 17 из 21 показателей оценки глав регионов. Четыре пробела — не недостаток, а готовый план доработки, который усилит заявку на статус экспериментального НП.</p>
+  <div class="ukaz" data-noexport>
+    <i class="u-ind" title="1 Доверие к власти — косвенный">1</i><i class="u-strong" title="2 Численность населения — прямой сильный">2</i><i class="u-dir" title="3 СКР — прямой">3</i><i class="u-ind" title="4 Продолжительность жизни — косвенный">4</i><i class="u-dir" title="5 Бедность — прямой">5</i><i class="u-dir" title="6 Спорт — прямой">6</i><i class="u-gap" title="7 СВО: реабилитация/трудоустройство — пробел">7</i><i class="u-dir" title="8 Образование — прямой">8</i><i class="u-gap" title="9 Таланты — пробел">9</i><i class="u-ind" title="10 Волонтёрство — косвенный">10</i><i class="u-ind" title="11 Воспитание — косвенный">11</i><i class="u-strong" title="12 Жилищные условия — прямой сильный">12</i><i class="u-strong" title="13 Ввод недвижимости — прямой сильный">13</i><i class="u-dir" title="14 Качество среды — прямой">14</i><i class="u-dir" title="15 Дороги — прямой">15</i><i class="u-gap" title="16 Общественный транспорт — пробел">16</i><i class="u-ind" title="17 Экология — косвенный">17</i><i class="u-dir" title="18 Доходы — прямой">18</i><i class="u-strong" title="19 Инвестиции — прямой сильный">19</i><i class="u-dir" title="20 Доход МСП — прямой">20</i><i class="u-gap" title="21 Цифровая зрелость — пробел">21</i>
+  </div>
+  <div class="legend" data-noexport><span><i style="background:var(--pine)"></i>прямой сильный (4)</span><span><i style="background:var(--field)"></i>прямой (8)</span><span><i style="background:var(--gold)"></i>косвенный (5)</span><span><i style="background:var(--clay)"></i>пробел (4)</span></div>
+  <p class="tcap">Таблица 11.1 — Четыре модуля, закрывающих пробелы Указа №1014</p>
+  <div class="tw"><table>
+    <thead><tr><th>Пробел</th><th>Модуль</th><th>Содержание и партнёры</th><th class="num">Срок</th></tr></thead>
+    <tbody>
+      <tr><td>п. 7 — СВО</td><td><b>«Тройка-Рубеж»</b></td><td>Квота 5% паёв/участков ветеранам; трудоустройство (охрана, инструкторы конного кластера, АПК); агротерапия и реабилитация на базе «Богдарни»; соглашение с фондом «Защитники Отечества». СИ уже доступна участникам СВО — самый быстрый канал заселения</td><td class="num">2027</td></tr>
+      <tr><td>п. 9 — таланты</td><td><b>«Тройка-Кванториум»</b></td><td>Агро- и техно-классы в школах микрорайонов, дуальные кафедры с ВлГУ, олимпиады кооператива, стипендии СПоК — связка с кадровой программой 6.9</td><td class="num">2029</td></tr>
+      <tr><td>п. 16 — транспорт</td><td><b>Транспортный контур</b></td><td>Маршрут «посёлки ↔ ст. Петушки/Костерёво ↔ park&amp;ride М-7», газомоторный парк, субсидия Минтранс области, стыковка с «Ласточкой»; без этого 120 км до Москвы остаются автомобилем обязательным</td><td class="num">2028</td></tr>
+      <tr><td>п. 21 — цифра</td><td><b>Цифровая платформа</b></td><td>Реестр паёв и участия (9.10), ЛК пайщика, эскроу-интеграция, «Госуслуги.Дом», ТИМ/BIM микрорайонов, телемедицина ФАП — после проверки правил на практике (8.7 Концепции)</td><td class="num">2028–2030</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note ok"><div class="note-t">◆ Легитимация: три письма этапа 0</div>
+  <p>(1) В Правительство области — о статусе экспериментального НП и трёхстороннем соглашении; (2) в Минсельхоз области — о квоте КРСТ 2027–2030 и грантах МТБ СПоК; (3) в Минэкономразвития — о регистрации ЦКК по №746 и синхронизации с «Инфраструктурой для жизни». Каждое письмо — с приложением унифицированного реестра значений, а не текущей разнобоящей версии.</p></div>
+</section>
+
+<!-- ============ S12 ============ -->
+<section id="s12" style="--acc:var(--clay)">
+  <div class="kicker">Раздел 12 · Риски</div>
+  <h2><span class="no">12</span>Матрица рисков: 19 позиций, фильтр и сортировка</h2>
+  <p class="lede">Обновлено относительно досье №1: добавлены риски земельного дисбаланса, эскроу ИЖС, гарантий ДОМ.РФ, заниженного соцCAPEX, рассинхронизации документов и актуарного дефицита демографической программы. Кликните строку — раскроется детализация меры.</p>
+  <div data-noexport>
+    <div class="chipbar" id="riskChips"></div>
+    <div class="tw"><table id="riskTable">
+      <thead><tr><th>№</th><th style="width:30%">Риск</th><th class="num">В</th><th class="num">У</th><th>Уровень</th><th>Мера снижения</th></tr></thead>
+      <tbody id="riskBody"></tbody>
+    </table></div>
+  </div>
+  <div class="export-only" id="x-risks"></div>
+  <div class="note risk"><div class="note-t">◆ Системный риск «единой точки отказа» — усилился</div>
+  <p>В v28 зависимость сконцентрировалась сильнее: разд. 14 → EBIT → доля кооператива → покрытие платежа 95% → привлекательность пая → темп переселения → потребительский рынок 18,86 млрд → EBIT внутригородского бизнеса. Разрыв любого звена запускает спираль. <b>Конструкция защиты:</b> (а) базовый сценарий без разд. 14 как публичный; (б) резервный фонд платежей ≥24 мес аннуитетов пилотных семей; (в) личный платёж семьи в договоре, а не «покрытие обещано»; (г) фазирование бизнеса за заселением; (д) «защитный клапан» −20% два года → пересмотр темпов (13.4).</p></div>
+</section>
+
+<!-- ============ S13 ============ -->
+<section id="s13" style="--acc:var(--field)">
+  <div class="kicker">Раздел 13 · Польза</div>
+  <h2><span class="no">13</span>Польза здесь и сейчас — и на горизонте</h2>
+  <p class="tcap">Таблица 13.1 — Немедленные эффекты (2026–2028), не зависящие от масштабирования</p>
+  <div class="tw"><table>
+    <thead><tr><th>Эффект</th><th>Бенефициар</th><th class="num">Измеритель</th></tr></thead>
+    <tbody>
+      <tr><td>«Стол заказов»: оптовые закупки без посредников</td><td>300–500 семей-пайщиков</td><td class="num">экономия 15–30% ≈ 30–60 млн ₽/год</td></tr>
+      <tr><td>Стройбаза П3 + лесопилка первой очереди</td><td>Жители округа</td><td class="num">60–120 рабочих мест</td></tr>
+      <tr><td>Гранты «Агростартап» (4–8 млн × N) + МТБ СПоК (до 70 млн)</td><td>СПоК, фермеры</td><td class="num">50–150 млн ₽</td></tr>
+      <tr><td>Дороги, газ, сети пилота — пользуются и существующие жители</td><td>Округ</td><td class="num">2–3 НП газифицированы</td></tr>
+      <tr><td>Двор 4–6 домов + магазин + площадка (очередь 1 слайдов)</td><td>Первые семьи</td><td class="num">демонстрация качества → доверие</td></tr>
+      <tr><td>Политический капитал: пилотная площадка федеральной политики</td><td>Администрация</td><td class="num">включение в госпрограммы</td></tr>
+    </tbody>
+  </table></div>
+  <p class="tcap">Таблица 13.2 — Горизонты эффекта</p>
+  <div class="tw"><table>
+    <thead><tr><th>Горизонт</th><th>Эффекты</th><th>Условие</th></tr></thead>
+    <tbody>
+      <tr><td><b>2029–2035</b></td><td>Микрорайон №1 (400 домов, 2 000 чел.); СПоК на мощности; СКПК устойчив; +15–30% налогов округа; дотационность 54,6% → 35–40%</td><td>Гейт пилота: себестоимость ≤4,73 млн +10%, конверсия воронки, ≥60% с доступом к СИ</td></tr>
+      <tr><td><b>2036–2046</b></td><td>Население 77–92 тыс.; 25 455 мест; налоги 91,9 млрд накопл.; 8 034 га в обороте; тиражируемая модель для РФ</td><td>Реалистично 40–70% (12.7): даже частичная реализация — кратный сдвиг для округа 27 тыс.</td></tr>
+      <tr><td><b>2047–2177 (150 лет)</b></td><td>~150 тыс. жителей, EBIT ×21, СКР 2,0–2,2 — иллюстративный сценарий «длинной воли»</td><td>Не прогноз. Климат, технологии, институты непредсказуемы; ценность — межпоколенческий якорь</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note ok"><div class="note-t">◆ Межпоколенческий якорь: неделимый фонд как траст Летчворта</div>
+  <p>Урок Говарда: Летчворт сохранил общественную собственность на землю через траст (1962), Уэлвин — размыл коммерчески. Урок Хуаси: долг 67% активов → утрата контроля за 1 юань. <b>Конструкция для «ТройкаГрада»:</b> неделимый фонд (инфраструктура, земля общего пользования) юридически неотчуждаем; потолок дивидендов внешним инвесторам ~5%; лимит долг/активы ≤50% уставным решением; контрольный пакет голосов — пайщики. Это превращает 150-летний горизонт из риторики в правовой механизм.</p></div>
+</section>
+
+<!-- ============ S14 ============ -->
+<section id="s14" style="--acc:var(--amber2)">
+  <div class="kicker">Раздел 14 · Доработка</div>
+  <h2><span class="no">14</span>Реестр предложений: 20 действий</h2>
+  <p class="tcap">Таблица 14.1 — Предложения по доработке с приоритетами и сроками</p>
+  <div class="tw"><table>
+    <thead><tr><th>№</th><th>Действие</th><th>Приоритет</th><th class="num">Срок</th><th>Ответственный</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Реестр ключевых значений v1.0 (устранить 12 рассинхронизаций) + внешний аудит ФЭМ</td><td><span class="bdg b-crit">Блокирующий</span></td><td class="num">этап 0</td><td>Проектный офис</td></tr>
+      <tr><td class="num">2</td><td>Пилот ДСК 10–20 домокомплектов + маркетинг-исследование элитного спроса; разд. 14 — только в оптимистичный сценарий</td><td><span class="bdg b-crit">Блокирующий</span></td><td class="num">2027</td><td>Правление, ДСК</td></tr>
+      <tr><td class="num">3</td><td>ЕГРН-инвентаризация земель в новых границах; сведение баланса 12 000 / 8 034 га; резерв в генплане</td><td><span class="bdg b-crit">Блокирующий</span></td><td class="num">этап 0</td><td>Администрация + офис</td></tr>
+      <tr><td class="num">4</td><td>Юрзаключение жилищной схемы (186-ФЗ эскроу ИЖС, 214-ФЗ, ЖСК, ГБУ/МБУ) до приёма средств</td><td><span class="bdg b-crit">Блокирующий</span></td><td class="num">этап 0</td><td>Юристы, Совет</td></tr>
+      <tr><td class="num">5</td><td>Сметный пересчёт соцCAPEX по ФЕР/ТЕР (разрыв 1,5–2,2×); заявки в федеральные программы на школы/ФАП</td><td><span class="bdg b-crit">Блокирующий</span></td><td class="num">2027</td><td>Офис, Минстрой области</td></tr>
+      <tr><td class="num">6</td><td>Актуарный фонд демографической программы; старт ≥2030 при фонде ≥15 млрд; пилот 100–200 семей</td><td><span class="bdg b-crit">Блокирующий</span></td><td class="num">2027–2030</td><td>Общее собрание</td></tr>
+      <tr><td class="num">7</td><td>Структура займа ДОМ.РФ без гарантии региона (или признание условия) — переговоры с СОПФ</td><td><span class="bdg b-high">Высокий</span></td><td class="num">этап 0</td><td>Финдиректор</td></tr>
+      <tr><td class="num">8</td><td>Стресс-тесты ставки дисконтирования 16/18/20%; барьер = КС + 3–5 п.п.</td><td><span class="bdg b-high">Высокий</span></td><td class="num">этап 0</td><td>Финмодель</td></tr>
+      <tr><td class="num">9</td><td>Запрос квоты КРСТ области 2027–2030; сценарий «КРСТ = 0» в ФЭМ</td><td><span class="bdg b-high">Высокий</span></td><td class="num">этап 0</td><td>GR</td></tr>
+      <tr><td class="num">10</td><td>Очередность площадок 3→1→2→4; ОВОС П3 и П4 первыми; буфер заказника</td><td><span class="bdg b-high">Высокий</span></td><td class="num">2027</td><td>Офис, экологи</td></tr>
+      <tr><td class="num">11</td><td>Резервный фонд платежей ≥24 мес аннуитетов пилотных семей; личный платёж в договоре</td><td><span class="bdg b-high">Высокий</span></td><td class="num">2027</td><td>Совет, СКПК</td></tr>
+      <tr><td class="num">12</td><td>Унификация демографического среза (31 600 возраст / 24 900 занятость); фазирование вакансий за заселением (лаг ≤20%)</td><td><span class="bdg b-high">Высокий</span></td><td class="num">этап 0</td><td>Офис</td></tr>
+      <tr><td class="num">13</td><td>Стандарт поселения 6.19: дизайн-код, пожарные проезды, парковочный норматив, зимостойкие аллеи</td><td><span class="bdg b-high">Высокий</span></td><td class="num">2027</td><td>Архитектор (Сердюкова)</td></tr>
+      <tr><td class="num">14</td><td>4 модуля Указа №1014: «Тройка-Рубеж», кванториум, транспортный контур, цифрплатформа</td><td><span class="bdg b-high">Высокий</span></td><td class="num">2027–2030</td><td>Комитеты</td></tr>
+      <tr><td class="num">15</td><td>Лесобаланс 1 млн м³ с лесничеством; энергобаланс площадок (щепа → генерация)</td><td><span class="bdg b-mid">Средний</span></td><td class="num">2027</td><td>Офис, АПК</td></tr>
+      <tr><td class="num">16</td><td>Регистрация ЦКК по №746; заявка на статус экспериментального НП; трёхстороннее соглашение</td><td><span class="bdg b-high">Высокий</span></td><td class="num">этап 0</td><td>Администрация</td></tr>
+      <tr><td class="num">17</td><td>Проектный офис 12–15 чел.; пакет положений 3.04–3.17, 5.01–5.15, 6.08 пакетами</td><td><span class="bdg b-high">Высокий</span></td><td class="num">этап 0</td><td>Совет</td></tr>
+      <tr><td class="num">18</td><td>Траст-конструкция неделимого фонда: потолок дивидендов 5%, лимит долг/активы ≤50%, голоса пайщикам</td><td><span class="bdg b-mid">Средний</span></td><td class="num">2028</td><td>Общее собрание</td></tr>
+      <tr><td class="num">19</td><td>Дуальное образование + артель строителей 1 500–2 000 чел. на пике; миграционные квоты</td><td><span class="bdg b-mid">Средний</span></td><td class="num">2027–2031</td><td>Ассоциация</td></tr>
+      <tr><td class="num">20</td><td>Номинальный сценарий индексации 8–12%/год; комплаенс «не пирамида» (фикс за информирование)</td><td><span class="bdg b-mid">Средний</span></td><td class="num">этап 0</td><td>Финмодель, комплаенс</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ============ S15 ============ -->
+<section id="s15" style="--acc:var(--pine2)">
+  <div class="kicker">Раздел 15 · Дорожная карта</div>
+  <h2><span class="no">15</span>Дорожная карта 2026–2046: стадии, гейты, спринт</h2>
+
+  <div class="gantt-box" data-noexport>
+    <div class="w-title" style="margin-bottom:10px">Ленточный план по площадкам и контурам · наведите на полосу</div>
+    <svg viewBox="0 0 1000 360" id="gantt">
+      <g font-family="JetBrains Mono" font-size="9" fill="#8A7F6A">
+        <text x="90" y="20">2026</text><text x="262" y="20">2030</text><text x="477" y="20">2035</text><text x="649" y="20">2039</text><text x="907" y="20">2046</text>
+        <line x1="90" y1="26" x2="90" y2="330" stroke="#C9BCA2"/><line x1="262" y1="26" x2="262" y2="330" stroke="#C9BCA2" stroke-dasharray="2 4"/><line x1="477" y1="26" x2="477" y2="330" stroke="#C9BCA2" stroke-dasharray="2 4"/><line x1="649" y1="26" x2="649" y2="330" stroke="#C9BCA2" stroke-dasharray="2 4"/><line x1="950" y1="26" x2="950" y2="330" stroke="#C9BCA2"/>
+      </g>
+      <g font-family="Inter" font-size="11" fill="#23281F">
+        <text x="8" y="52">П3 · стройбаза</text><text x="8" y="96">П1 · жильё</text><text x="8" y="140">П2 · деловой узел</text><text x="8" y="184">П4 · агроусадьбы</text><text x="8" y="228">СПоК / АПК</text><text x="8" y="272">ДСК / кластеры</text><text x="8" y="316">Демограф. прогр.</text>
+      </g>
+      <g>
+        <rect x="99" y="40" width="163" height="18" rx="5" fill="#1F3D2B"><title>П3: 2026.8–2030 — стройбаза, лесопилка, ДСК, пилот 4–6 → 30–50 → 400 домов</title></rect>
+        <rect x="262" y="40" width="258" height="18" rx="5" fill="#3E7A4E" opacity=".85"><title>П3: 2030–2036 — тиражирование микрорайонов</title></rect>
+        <rect x="133" y="84" width="129" height="18" rx="5" fill="#2E5A3C"><title>П1: 2027–2030 — жилищный пилот 30–50 домов у Петушков</title></rect>
+        <rect x="262" y="84" width="430" height="18" rx="5" fill="#6FA07A" opacity=".85"><title>П1: 2030–2040 — рост</title></rect>
+        <rect x="305" y="128" width="344" height="18" rx="5" fill="#2E6E8E"><title>П2: 2031–2038 — деловой узел, логистика М-7</title></rect>
+        <rect x="391" y="172" width="473" height="18" rx="5" fill="#C9A227"><title>П4: 2033–2044 — агроусадьбы, теплицы, агротуризм (после ОВОС)</title></rect>
+        <rect x="133" y="216" width="817" height="18" rx="5" fill="#3E7A4E"><title>СПоК: 2027–2046 — ЕСХН-контур, переработка, сбыт</title></rect>
+        <rect x="133" y="260" width="473" height="18" rx="5" fill="#B4770A"><title>ДСК/кластеры: 2027–2038 — пилот ДСК, ТОР-заявка, 7 кластеров поэтапно</title></rect>
+        <rect x="262" y="304" width="688" height="18" rx="5" fill="none" stroke="#C2402A" stroke-width="2" stroke-dasharray="6 4"><title>Демографическая программа: старт ≥2030 при актуарном фонде; хвост до 2064</title></rect>
+      </g>
+      <g fill="#C2402A"><path d="M262 26 l6 8 -6 8 -6 -8z"><title>2030 — гейт пилота</title></path><path d="M477 26 l6 8 -6 8 -6 -8z"><title>2035 — 25% объёма</title></path><path d="M606 26 l6 8 -6 8 -6 -8z"><title>2038 — 50% объёма</title></path><path d="M864 26 l6 8 -6 8 -6 -8z"><title>2044 — 100% объёма</title></path></g>
+    </svg>
+  </div>
+  <div class="export-only" id="x-gantt"></div>
+
+  <div class="stage rv"><div class="stage-n"><b>0</b><span>IV.2026–2027</span></div><div class="stage-b"><h4>Запуск и расчистка</h4><p>Реестр значений v1.0 · юрзаключение жилищной схемы · ЕГРН-инвентаризация · ОВОС П3 · письма КРСТ/ДОМ.РФ/№746 · трёхстороннее соглашение · СПоК и СКПК · проектный офис · «стол заказов» · пилот ДСК 10–20 шт · маркетинг элитного спроса.</p><div class="gate"><b>Гейт 0→1:</b> аудит без критических замечаний; правовая схема утверждена; площадка П3 согласована; себестоимость пилотного дома подтверждена сметой.</div></div></div>
+  <div class="stage rv"><div class="stage-n"><b>1</b><span>2027–2030</span></div><div class="stage-b"><h4>Пилот: лестница 4–6 → 30–50 → 400</h4><p>П3: стройбаза, лесопилка, первый двор 4–6 домов (очередь 1 слайдов) → 30–50 (Концепция 5.8) → микрорайон №1 на 400 (2030). П1: параллельный жилищный пилот у Петушков. СПоК: 2 мини-фермы, пекарня, маслобойня. СКПК: нормативы ЦБ. Учёт участия, «школа собственника», паспорт территории.</p><div class="gate"><b>Гейт 1→2:</b> ввод без удорожания &gt;10–15%; конверсия воронки подтверждена; ≥60–70% переселенцев с доступом к СИ; СКПК устойчив; покрытие платежа фактом ≥50% с траекторией роста.</div></div></div>
+  <div class="stage rv"><div class="stage-n"><b>2</b><span>2031–2038</span></div><div class="stage-b"><h4>Активный рост</h4><p>10–12 микрорайонов; П2 деловой узел; кластеры АПК/стройхимия/оборудование; ТОР-заявка; демографическая программа при фонде; ЦКК и дуальное образование на мощности. <b>2034–35:</b> ~25% (2 500 домов, 375 предприятий). <b>2038:</b> ~50%, промежуточная оценка.</p><div class="gate"><b>Гейт 2→3:</b> отклонение от S-кривой ≤20% два года подряд; бизнес-контур генерирует прибыль; актуарный фонд достаточен.</div></div></div>
+  <div class="stage rv"><div class="stage-n"><b>3</b><span>2039–2044</span></div><div class="stage-b"><h4>Насыщение</h4><p>Завершение сети 25 микрорайонов; П4 агроусадьбы и туризм; высокотехнологичные кластеры на мощности; <b>2044:</b> 100% целевого объёма (реалистично 40–70% — горизонт продлевается).</p></div></div>
+  <div class="stage rv"><div class="stage-n"><b>4</b><span>2045–2046+</span></div><div class="stage-b"><h4>Закрепление и наследие</h4><p>Полная операционная мощность; итоговый аудит эффективности; траст-конструкция неделимого фонда; тиражирование модели в другие регионы; пересмотр стратегии на 2047–2096.</p></div></div>
+
+  <h3>90-дневный спринт этапа 0</h3>
+  <p class="tcap">Таблица 15.1 — Спринт IV кв. 2026</p>
+  <div class="tw"><table>
+    <thead><tr><th class="num">Недели</th><th>Действие</th><th>Результат</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1–2</td><td>Реестр значений v1.0; ТЗ внешнему аудитору ФЭМ</td><td>12 расхождений устранены; договор аудита</td></tr>
+      <tr><td class="num">3–4</td><td>Запросы ЕГРН/Россельхознадзор; письма КРСТ, ДОМ.РФ, лесничество</td><td>Земельная база в новых границах; квоты и условия на бумаге</td></tr>
+      <tr><td class="num">5–6</td><td>Юрзаключение 186-ФЗ/214-ФЗ/ЖСК/ГБУ; выбор жилищной схемы</td><td>Правовая конструкция до приёма средств</td></tr>
+      <tr><td class="num">7–8</td><td>Проектный офис; заявка ЦКК №746; ОВОС П3 — ТЗ</td><td>Команда 12–15 чел.; институциональная рамка</td></tr>
+      <tr><td class="num">9–10</td><td>ТЗ пилота ДСК 10–20 шт; маркетинг-исследование элитного спроса</td><td>Проверка разд. 14 фактом</td></tr>
+      <tr><td class="num">11–12</td><td>Трёхстороннее соглашение; документы СПоК/СКПК; запуск «стола заказов»</td><td>Первая экономия пайщиков 15–30%; регистрация звеньев</td></tr>
+    </tbody>
+  </table></div>
+  <p class="tcap">Таблица 15.2 — KPI-панель мониторинга (три контура)</p>
+  <div class="tw"><table>
+    <thead><tr><th>KPI</th><th class="num">Целевое</th><th>Периодичность</th></tr></thead>
+    <tbody>
+      <tr><td>Ввод домов / жителей / бизнеса / мест</td><td class="num">по S-кривой ±10–15%</td><td>ежегодно</td></tr>
+      <tr><td>Доля переселенцев с доступом к «Сельской ипотеке»</td><td class="num">≥60–70%</td><td>ежегодно</td></tr>
+      <tr><td>Фактическое покрытие платежа долей прибыли</td><td class="num">траектория к ≥85%</td><td>ежеквартально</td></tr>
+      <tr><td>Лаг вакансий за заселением</td><td class="num">≤20%</td><td>ежегодно</td></tr>
+      <tr><td>Экономия «стола заказов» к средним ценам области</td><td class="num">≥15%</td><td>ежеквартально</td></tr>
+      <tr><td>Нормативы СКПК (ЦБ)</td><td class="num">100%</td><td>ежеквартально</td></tr>
+      <tr><td>Актуарная достаточность демографического фонда</td><td class="num">≥100%</td><td>ежегодно</td></tr>
+      <tr><td>Рассинхронизаций в документах</td><td class="num">0</td><td>при каждом релизе</td></tr>
+      <tr><td>ОВОС площадок / буфер заказника</td><td class="num">4/4</td><td>этап 0–1</td></tr>
+      <tr><td>Отклонение &gt;20% два года → пересмотр темпов</td><td class="num">клапан</td><td>Совет → Общее собрание</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ============ S16 ============ -->
+<section id="s16" style="--acc:var(--pine)">
+  <div class="kicker">Раздел 16 · Вердикт</div>
+  <h2><span class="no">16</span>Итоговый вердикт</h2>
+  <div class="note ok" style="border-width:5px"><div class="note-t">◆ Экспертное заключение · 23.11.2026</div>
+  <p><b>Мастер-план v28 и сборка слайдов существенно продвинули проект</b> относительно базы досье №1: появилась методология замкнутого контура, пространственная конкретика четырёх площадок, единый стандарт поселения, честная история финмодели и политическая рамка 17/21 показателей Указа №1014. Интегральная оценка выросла с ~6,9 до <b>7,0/10</b> — за счёт методологии (9,0) и территории (7,0), при снижении оценки демографического блока (5,5) из-за необеспеченных 44,2 млрд ₽.</p>
+  <p><b>Проект рекомендуется к поэтапной реализации при шести блокирующих условиях:</b></p>
+  <ul>
+    <li>1. Реестр значений v1.0 + внешний аудит ФЭМ (12 рассинхронизаций → 0).</li>
+    <li>2. Разд. 14 — только оптимистичный сценарий; пилот 10–20 домокомплектов и маркетинг до коммуникации пайщикам.</li>
+    <li>3. Земельный баланс в новых границах округа + резервирование в генплане до его утверждения.</li>
+    <li>4. Юрзаключение жилищной схемы (эскроу ИЖС 186-ФЗ, 214-ФЗ, ЖСК, ГБУ/МБУ) до приёма средств.</li>
+    <li>5. Сметный пересчёт соцCAPEX (разрыв 1,5–2,2×) + структура ДОМ.РФ без гарантий региона или признание условия.</li>
+    <li>6. Актуарный фонд демографической программы; старт не ранее 2030 г.</li>
+  </ul>
+  <p><b>Стартовая конфигурация:</b> площадка 3 (стройбаза + ДСК + лесопилка) → параллельный жилищный пилот площадки 1 → деловой узел площадки 2 → агроусадьбы площадки 4 после ОВОС. Лестница пилота 4–6 → 30–50 → 400 домов. При соблюдении условий «ТройкаГрад» имеет шанс стать первой в РФ реализованной моделью комплексного развития сельской территории кооперативного типа — и правовым трастом на 150 лет, а не презентацией.</p></div>
+  <p class="tcap">Таблица 16.1 — Итоговая оценка</p>
+  <div class="tw"><table>
+    <thead><tr><th>Критерий</th><th class="num">Досье №1</th><th class="num">Досье №2</th><th>Δ</th></tr></thead>
+    <tbody>
+      <tr><td>Методология</td><td class="num">8,5</td><td class="num">9,0</td><td>разд. 0, замкнутый контур</td></tr>
+      <tr><td>Территория / стандарт</td><td class="num">6,0</td><td class="num">7,0</td><td>4 площадки, дизайн-код; баланс не сведён</td></tr>
+      <tr><td>Финансы</td><td class="num">6,2</td><td class="num">6,5</td><td>честность ↑, зависимость от разд. 14 ↑</td></tr>
+      <tr><td>Демография</td><td class="num">6,0</td><td class="num">5,5</td><td>программа 44,2 млрд вне модели</td></tr>
+      <tr><td>Политика</td><td class="num">8,2</td><td class="num">8,5</td><td>17/21 + статус экспериментального НП</td></tr>
+      <tr><td><b>Интеграл</b></td><td class="num"><b>6,9</b></td><td class="num"><b>7,0</b></td><td><b>условно рекомендовано</b></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<footer>
+  <div class="fq">«Свой дом — своя земля»</div>
+  <p>Экспертное досье №2 подготовлено на основании: Мастер-план Петушинского округа v28 (проект-программа «Свой Дом — Своя Земля», июль 2026, уточнения 27–31.08.2026); сборка слайдов «Четыре площадки развития Петушинского района»; Концепция кооперативной модели 2.01 (МПКСИ «ТройкаГрад», 2026); презентация финансово-экономической модели. Оценка носит рекомендательный характер и не является юридическим или финансовым заключением. Диапазоны, помеченные «экспертная оценка», — суждение аналитика, а не данные модели.</p>
+  <div class="f-meta">23.11.2026 · ПЕТУШИНСКИЙ МО · ВЛАДИМИРСКАЯ ОБЛ. · 56.0455N 39.4970E — 55.8928N 39.7307E · ДЛЯ СЛУЖЕБНОГО ПОЛЬЗОВАНИЯ</div>
+</footer>
+
+</main>
+</div>
+
+<div id="toasts" data-noexport></div>
+<div id="overlay" data-noexport><div class="spin"><i></i><i></i><i></i></div><div id="ovText" style="font-family:var(--mono);font-size:13px;letter-spacing:1px">Формируем документ…</div></div>
+
+<script>
+(function(){'use strict';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>n.toLocaleString('ru-RU');
+const FNAME='TroikaGrad_Dossier_2_v28_2026-11-23';
+
+/* ---------- toast ---------- */
+function toast(msg,type){const t=document.createElement('div');t.className='toast '+(type||'');t.textContent=msg;$('#toasts').appendChild(t);setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .4s';setTimeout(()=>t.remove(),400)},4200);}
+function overlay(on,txt){const o=$('#overlay');if(txt)$('#ovText').textContent=txt;o.classList.toggle('show',on);}
+
+/* ---------- nav / progress / spy ---------- */
+const secs=$$('main section');
+const spy=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const id=e.target.id;$$('#navLinks a,#chips a,#toc a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));}})},{rootMargin:'-30% 0px -60% 0px'});
+secs.forEach(s=>spy.observe(s));
+let ticking=false;
+addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);$('#progress').style.width=(p*100)+'%';ticking=false;});ticking=true;}},{passive:true});
+
+/* ---------- reveals / scores / counters ---------- */
+const rio=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');if(e.target.classList.contains('score')){const f=e.target.querySelector('.sf');f.style.width=f.dataset.w+'%';}rio.unobserve(e.target);}})},{threshold:.15});
+$$('.rv,.score').forEach(el=>rio.observe(el));
+const cio=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const el=e.target,end=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),t0=performance.now();
+(function step(t){const k=Math.min(1,(t-t0)/1400),v=end*(1-Math.pow(1-k,3));el.textContent=dec?v.toFixed(dec).replace('.',','):fmt(Math.round(v));if(k<1)requestAnimationFrame(step);})(t0);})},{threshold:.4});
+$$('[data-count]').forEach(el=>cio.observe(el));
+
+/* ---------- sites map ---------- */
+const SITES=[
+ {n:1,name:'Севернее Петушков (СНТ «Приволье»)',coords:'56.0455°N · 39.4970°E',spec:'Жильё + сервисная функция',dist:'≈5–10 км до М-7/ж-д',near:'СНТ «Приволье», пруд',queue:'Очередь 2 (параллельный пилот)',risk:'Дальность от коридора (5–10 км); дачная конкуренция за землю; подъездные дороги с нуля.',verdict:'Жилищный пилот 30–50 домов: близость Петушков (школа, ФАП, ж/д) снижает соцCAPEX пилота. Пруд и лес — рекреационная ценность.'},
+ {n:2,name:'Западнее Костерёва',coords:'55.9363°N · 39.5305°E',spec:'Жильё + деловая зона',dist:'≈4–5 км до М-7 и ж/д',near:'Костерёво, Волосово, Аксеново; озеро',queue:'Очередь 3 (фаза 2)',risk:'Шум М-7/ж-д — защитный зелёный буфер обязателен; деловая зона конкурирует с Покровом.',verdict:'Деловой узел коридора Петушки–Костерёво: офисы, логистика, торговля у транспортного коридора; озеро — рекреационный каркас.'},
+ {n:3,name:'У д. Старое Аннино',coords:'55.9553°N · 39.3639°E',spec:'Жильё + производственно-строительная база',dist:'≈2–3 км до коридора',near:'Старое Аннино; Петушки ~5 км',queue:'Очередь 1 — СТАРТ',risk:'Производственная зона требует СЗЗ и раздельных въездов; ОВОС до эскизов.',verdict:'Ближайшая к Москве площадка. Слайды закрепляют стройбазу первой очереди: лесопилка, ДОК, склады, техника — «фабрика стройки» для всех площадок. Здесь же пилот ДСК 10–20 домокомплектов.'},
+ {n:4,name:'У д. Аббакумово',coords:'55.8928°N · 39.7307°E',spec:'Агроусадьбы + агротуризм',dist:'≈4–5 км до коридора',near:'Аббакумово ~2,5–3 км; заказник ~7 км',queue:'Очередь 4 (после ОВОС)',risk:'Статус действующей пашни НЕ подтверждён; южная часть Пекшинского поселения — лес и Крутовский заказник; буферная зона требует проверки.',verdict:'Сады, теплицы, фермерские участки, экотуризм по модели «Богдарни». Запускать последней: сначала подтверждение земель и ОВОС, затем агроусадьбы без нарушения сельского характера.'}
+];
+function renderPassport(i){const s=SITES[i];
+ $('#passport').innerHTML='<div class="pp-head"><div><div class="pp-name">'+s.name+'</div><div class="pp-coords">'+s.coords+'</div></div><div class="pp-num">'+s.n+'</div></div>'
+ +'<span class="bdg b-new" style="align-self:flex-start">'+s.spec+'</span>'
+ +'<div class="pp-rows"><div><span>Транспорт</span><span>'+s.dist+'</span></div><div><span>Соседство</span><span>'+s.near+'</span></div><div><span>Контур / 1-я фаза</span><span>~3000 га / 60 га · 400 домов</span></div><div><span>Кластер / резерв</span><span>200–250 га / 21–22%</span></div><div><span>Рекомендация</span><span>'+s.queue+'</span></div></div>'
+ +'<div class="pp-risk"><b>Риск:</b> '+s.risk+'</div><div class="pp-verdict">'+s.verdict+'</div>'
+ +'<div class="pp-nav"><button data-nav="-1">← пред.</button><button data-nav="1">след. →</button></div>';
+ $$('.site').forEach(g=>g.classList.toggle('on',+g.dataset.i===i));
+ $('#passport').dataset.cur=i;}
+let curSite=2;renderPassport(curSite);
+$$('.site').forEach(g=>{const go=()=>{curSite=+g.dataset.i;renderPassport(curSite);};g.addEventListener('click',go);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});});
+$('#passport').addEventListener('click',e=>{const b=e.target.closest('[data-nav]');if(b){curSite=(curSite+ +b.dataset.nav+4)%4;renderPassport(curSite);}});
+$$('.layers input').forEach(c=>c.addEventListener('change',()=>{const g=document.getElementById(c.dataset.layer);if(g)g.style.display=c.checked?'':'none';}));
+/* export twin: sites */
+$('#x-sites').innerHTML='<p class="tcap">Таблица 3.1 — Паспорта четырёх площадок (слайды + v28, 2.8)</p><div class="tw"><table><thead><tr><th>Площадка</th><th>Координаты</th><th>Специализация</th><th>До М-7/ж-д</th><th>Рекомендуемая очередь</th><th>Ключевой риск</th></tr></thead><tbody>'
+ +SITES.map(s=>'<tr><td><b>П'+s.n+' · '+s.name+'</b></td><td>'+s.coords+'</td><td>'+s.spec+'</td><td>'+s.dist+'</td><td>'+s.queue+'</td><td>'+s.risk+'</td></tr>').join('')+'</tbody></table></div>';
+
+/* ---------- scenarios ---------- */
+const SCN={
+ base:{irr:'9,45%',npv:'−2 373,7',pi:'0,89',pay:'16 / >20',cov:'≈54%',neg:true,bar:'base',note:'Базовый сценарий на подтверждённых корректировках (внутригородской бизнес от спроса 50 000 жителей, переработка АПК, технопарк 25%). IRR ниже барьера 12%, NPV отрицателен, PI<1 — проект не окупается в 20-летнем горизонте как коммерческий. Именно этот сценарий следует считать публичным базовым до подтверждения разд. 14.'},
+ model:{irr:'19,87%',npv:'+7 942,6',pi:'1,35',pay:'12 / 15',cov:'95,3%',neg:false,bar:'model',note:'Оптимистичный верхний сценарий: разд. 14 (+5 млрд EBIT, маржа 100%, 500 домокомплектов/год) + ТОР для 4 объектов (постановление Правительства, не гарантировано) + ЕСХН-контур СПоК (реалистичен). Модель сама признаёт: разворот результата целиком обеспечен наименее подтверждённой строкой. При ставке дисконтирования 16–18% запас прочности исчезает.'},
+ real:{irr:'11–14%*',npv:'−1…+3 млрд*',pi:'0,95–1,15*',pay:'14–17 / 18–>20*',cov:'45–70%*',neg:false,bar:'real',note:'* Экспертная оценка при выполнении 40–70% целевых (разд. 12.7 честно допускает этот диапазон). Пропорциональное снижение объёмов снижает и мультипликатор (7,06 → ~2,8–5,0), и покрытие платежа. Даже так — кратный социально-бюджетный сдвиг для округа 27 тыс. жителей; коммерческая логика вторична.'}
+};
+function setScn(k){const s=SCN[k];
+ $$('.scn-tab').forEach(t=>t.classList.toggle('on',t.dataset.s===k));
+ $('#kIrr').textContent=s.irr;const np=$('#kNpv');np.textContent=s.npv;np.classList.toggle('neg',s.neg);
+ $('#kPi').textContent=s.pi;$('#kPay').textContent=s.pay;$('#kCov').textContent=s.cov;$('#scnNote').textContent=s.note;
+ $$('#irrBars .ibar').forEach(g=>{const on=g.dataset.b===s.bar;g.querySelector('rect').setAttribute('stroke',on?'#D9930D':'none');g.querySelector('rect').setAttribute('stroke-width',on?'3':'0');});}
+$('#scnTabs').addEventListener('click',e=>{const t=e.target.closest('.scn-tab');if(t)setScn(t.dataset.s);});
+setScn('model');
+$('#x-scen').innerHTML='<p class="tcap">Таблица 5.2 — Сценарии хозяйственного контура (ФЭМ v28, разд. 8.9, 9.1; * — экспертная оценка)</p><div class="tw"><table><thead><tr><th>Сценарий</th><th class="num">IRR</th><th class="num">NPV, млн ₽</th><th class="num">PI</th><th class="num">Окуп. прост./диск., лет</th><th class="num">Покрытие платежа</th></tr></thead><tbody>'
+ +'<tr><td>Базовый · без разд. 14</td><td class="num">9,45%</td><td class="num">−2 373 649</td><td class="num">0,89</td><td class="num">16 / >20</td><td class="num">≈54%</td></tr>'
+ +'<tr><td>+ разд. 14 (до ТОР)</td><td class="num">18,43%</td><td class="num">+6 642 326</td><td class="num">1,30</td><td class="num">13 / 16</td><td class="num">—</td></tr>'
+ +'<tr><td>+ ТОР (разд. 15)</td><td class="num">19,40%</td><td class="num">+7 436 501</td><td class="num">1,33</td><td class="num">12 / 15</td><td class="num">—</td></tr>'
+ +'<tr><td>Модельный · + ЕСХН (разд. 16)</td><td class="num">19,87%</td><td class="num">+7 942 552</td><td class="num">1,35</td><td class="num">12 / 15</td><td class="num">95,28%</td></tr>'
+ +'<tr><td>Реалистичный 40–70%*</td><td class="num">11–14%</td><td class="num">−1…+3 млрд</td><td class="num">0,95–1,15</td><td class="num">14–17 / 18–>20</td><td class="num">45–70%</td></tr>'
+ +'</tbody></table></div>';
+
+/* ---------- calculator ---------- */
+const PAI=9734000;
+const C={own:$('#cOwn'),krst:$('#cKrst'),rate:$('#cRate'),years:$('#cYears'),share:$('#cShare')};
+function calc(){
+ const ownP=+C.own.value,krst=+C.krst.value,rate=+C.rate.value,yrs=+C.years.value,share=+C.share.value;
+ const own=Math.round(PAI*ownP/100),loan=Math.max(0,PAI-own-krst);
+ const r=rate/1200,n=yrs*12,pay=r>0?loan*r/(1-Math.pow(1+r,-n)):loan/n;
+ const cov=pay>0?share/pay*100:100,pers=Math.max(0,pay-share);
+ $('#oOwn').textContent=ownP+'% · '+fmt(own)+' ₽';$('#oKrst').textContent=fmt(krst)+' ₽';
+ $('#oRate').textContent=rate.toFixed(1).replace('.',',')+'%';$('#oYears').textContent=yrs;$('#oShare').textContent=fmt(share)+' ₽';
+ $('#rLoan').textContent=fmt(Math.round(loan))+' ₽';$('#rPay').textContent=fmt(Math.round(pay))+' ₽/мес';
+ $('#rPersonal').textContent=fmt(Math.round(pers))+' ₽/мес';
+ $('#rCov').innerHTML=Math.min(cov,999).toFixed(1).replace('.',',')+'<small> %</small>';
+ const g=$('#rGauge');g.style.width=Math.min(100,cov)+'%';g.className=cov<60?'bad':cov<90?'warn':'';
+ Object.values(C).forEach(i=>{const p=(i.value-i.min)/(i.max-i.min)*100;i.style.setProperty('--p',p+'%');});
+ $('#rHint').textContent=cov>=90?'Модельный сценарий на полной мощности (год 12+). В годы раскрутки покрытие существенно ниже — нужен резервный фонд платежей.':cov>=60?'Частичное покрытие: семья несёт заметный личный платёж. В договоре фиксировать личный платёж, не «покрытие обещано».':'Критическая зона: без резервного фонда платежей и опережающего трудоустройства программа для семьи недоступна.';}
+Object.values(C).forEach(i=>i.addEventListener('input',calc));
+const PRESETS={model:[5,378720,3,20,46863],no14:[5,378720,3,20,26560],market:[20,0,18,20,46863],ramp:[5,378720,3,20,12000]};
+$$('.presets button').forEach(b=>b.addEventListener('click',()=>{const p=PRESETS[b.dataset.preset];C.own.value=p[0];C.krst.value=p[1];C.rate.value=p[2];C.years.value=p[3];C.share.value=p[4];calc();}));
+calc();
+
+/* ---------- demo toggle ---------- */
+$('#demoTgl').addEventListener('change',e=>{const on=e.target.checked;
+ $('#dTotal').innerHTML=on?'44,2 <small style="font-size:13px">млрд ₽</small>':'0 <small style="font-size:13px">₽</small>';
+ $('#dPeak').innerHTML=on?'3,84 <small style="font-size:13px">млрд/год</small>':'0 <small style="font-size:13px">/год</small>';
+ $('#dBurden').innerHTML=on?'Пик = <b>26%</b> модельного EBIT (15,0 млрд) — но <b>38%</b> базового EBIT без разд. 14 (10,0 млрд). Хвост взносов на счета детей продолжается до <b>38-го года модели</b> — вдвое дольше горизонта ФЭМ.':'Без программы население к 2046 — <b>77 013</b> вместо 92 268 (−15 255 чел., −17% итоговой численности). Демографический контур — не опция, а несущая конструкция цели «остановить убыль».';});
+$('#x-demo').innerHTML='<p class="tcap">Таблица 7.3 — Финансовая нагрузка программы «Родился кормилец» (v28, 2.9)</p><div class="tw"><table><thead><tr><th>Параметр</th><th class="num">Значение</th></tr></thead><tbody>'
+ +'<tr><td>Стоимость на 1 ребёнка (счёт 1,13 млн + компенсация ЗП 2,52 млн)</td><td class="num">3 650 000 ₽</td></tr>'
+ +'<tr><td>Совокупные расходы за 20 лет</td><td class="num">≈44 195 млн ₽</td></tr>'
+ +'<tr><td>Пик (2043) / год 20 (2046)</td><td class="num">3 840 / 3 331 млн ₽/год</td></tr>'
+ +'<tr><td>Доля пика от EBIT: модельный 15,0 млрд / базовый 10,0 млрд</td><td class="num">26% / 38%</td></tr>'
+ +'<tr><td>Доп. прирост населения</td><td class="num">+15 255 чел.</td></tr>'
+ +'<tr><td>Хвост обязательств</td><td class="num">до 38-го года модели (2064)</td></tr>'
+ +'<tr><td>Интеграция в ФЭМ</td><td>НЕ выполнена — требуется каскадный пересчёт</td></tr></tbody></table></div>';
+
+/* ---------- risks ---------- */
+const RISKS=[
+ {id:'F1',cat:'Финансы',n:'Разд. 14 не подтверждён: +5 млрд EBIT, маржа 100%',p:3,i:3,m:'Пилот 10–20 домокомплектов + маркетинг элитного спроса; исключить из базового сценария.',d:'Себестоимость 50 тыс/м² ниже рыночной отделки обычного дома; 500 элитных коттеджей/год — заметная доля всего рынка РФ. До подтверждения — только оптимистичный сценарий.'},
+ {id:'F2',cat:'Финансы',n:'Барьер 12% ниже рыночной стоимости капитала',p:2,i:3,m:'Барьер = ключевая ставка + 3–5 п.п.; стресс-тесты 16/18/20%.',d:'При 16% NPV модельного сценария ~+2–3 млрд, при 18% — около нуля. IRR 19,87% — не запас, а маржа.'},
+ {id:'F3',cat:'Финансы',n:'Квоты и сокращение КРСТ (7,25 млрд в плане)',p:2,i:3,m:'Запрос квоты области; сценарий «КРСТ=0»; опора на паи и неделимый фонд.',d:'Федеральный бюджет программы ~108 млрд/год на всю страну; адресность ~40% семей — проверить письмом Минсельхоз.'},
+ {id:'F4',cat:'Финансы',n:'ДОМ.РФ: 90% гарантия субъекта vs «без гарантий региона»',p:2,i:3,m:'Переговоры с СОПФ об альтернативной структуре; либо признать условие в модели.',d:'Прямое противоречие разд. 7.3 и 9.2/10.5 v28 — блокирующее для заявки на облигации.'},
+ {id:'F5',cat:'Финансы',n:'СоцCAPEX занижен в 1,5–2,2× (17,3 vs 27–37 млрд)',p:2,i:3,m:'Сметы ФЕР/ТЕР; школы/сады — федеральные программы; укрупнение школ.',d:'Аналог КРСТ: сад 240 мест = 475,6 млн. 25 садов + 10–12 школ + ФАП + сети не укладываются в 693 млн/микрорайон.'},
+ {id:'F6',cat:'Финансы',n:'Покрытие 95% — только на полной мощности (год 12+)',p:3,i:3,m:'Резервный фонд ≥24 мес аннуитетов; личный платёж в договоре; лестница сценариев.',d:'Годы 1–5 покрытие ~24–54%. Без фонда платежей первые семьи несут рыночную нагрузку → репутационный удар.'},
+ {id:'L1',cat:'Земля',n:'Дисбаланс 12 000 га контуров / 8 034 га резерва / старые границы',p:2,i:3,m:'ЕГРН-инвентаризация в новых границах; кадастровая съёмка 4 контуров.',d:'8 034 га — из Стратегии старого района (58,8–61,5 тыс. чел.); часть угодий могла отойти Покрову.'},
+ {L:'L2',id:'L2',cat:'Земля',n:'Перевод сельхоз → ИЖС ~2 000–2 600 га; генплан',p:2,i:3,m:'КРТ ст. 70 ГрК по инициативе правообладателей; резервирование до утверждения генплана.',d:'Срок консолидации ~3000 га/площадку — 2–4 года; без изъятия (добровольный выкуп) — правильно, но медленно.'},
+ {id:'L3',cat:'Право',n:'Эскроу ИЖС (186-ФЗ с 01.03.2025) / 214-ФЗ / схема ЖСК',p:2,i:3,m:'Юрзаключение до приёма средств; единая конструкция вместо ПКИЗ/15-85.',d:'Хозспособ Общества → продажа готового дома может обойти подряд-эскроу; требуется письменное заключение и налоговая экспертиза.'},
+ {id:'L4',cat:'Право',n:'ГБУ/МБУ: фикс. доход 5% и имущественный пай 13,3 млрд',p:2,i:2,m:'ГЧП/аренда вместо пая; пересчёт покрытия без приоритетной выплаты 666,7 млн.',d:'Концепция 10.8 уже адаптировала; v28 4.8 — нет. Синхронизировать в сторону Концепции.'},
+ {id:'D1',cat:'Демография',n:'Переселение 2 500 чел/год при конкуренции регионов',p:3,i:3,m:'Воронка с целевыми конверсиями; пилот-волна 400; цифровое сообщество за 2–3 года.',d:'Область теряет ~13 тыс/год; проект должен «перетянуть» население у Подмосковья, Твери, Калуги. Уникальное предложение — пай+работа+сообщество, а не просто дом.'},
+ {id:'D2',cat:'Демография',n:'Программа «Кормилец»: 44,2 млрд вне ФЭМ, хвост до 2064',p:2,i:3,m:'Актуарный фонд; старт ≥2030 при ≥15 млрд; пилот 100–200 семей; vesting.',d:'Пик 38% базового EBIT. Компенсация ЗП предполагает формальную занятость; НДФЛ/взносы — экспертиза.'},
+ {id:'D3',cat:'Демография',n:'Трудобаланс: 25 455 мест ≈ 31 600 возрастных / >24 900 занятых',p:2,i:2,m:'Лаг вакансий за заселением ≤20%; маятник из Покрова/Собинки; удалёнка.',d:'Расхождение 63,2%/49,8% в срезе 5.6 — унифицировать две метрики раздельно.'},
+ {id:'P1',cat:'Производство',n:'Кадры кластеров и соцсферы (фарма, химия, робототехника)',p:3,i:2,m:'Дуальное образование с 2027; земские программы; мост с «Генериумом» (Покров).',d:'GMP-фарма — 5–7 лет на объект; кластеры 3-й очереди, не 1-й.'},
+ {id:'P2',cat:'Производство',n:'ДСК двойная линия 1 200–1 800 единиц/год на пике',p:2,i:2,m:'Две линии + артель 1 500–2 000 строителей; миграционные квоты; зимнее строительство −15–25%.',d:'Мощность ≠ продажи: внешний элитный рынок подтверждать пилотом.'},
+ {id:'G1',cat:'Управление',n:'12 рассинхронизаций документов → потеря доверия',p:3,i:2,m:'Реестр значений v1.0; версионирование; аудит каждого релиза.',d:'Разные разделы одного документа дают EBIT 8,8 и 15,0 млрд — блокирующий дефект коммуникации.'},
+ {id:'G2',cat:'Управление',n:'Управленческая ёмкость / захват контроля',p:2,i:3,m:'Проектный офис 12–15 чел.; Совет 5 лет; аудит; траст неделимого фонда; лимит долг/активы ≤50%.',d:'Уроки Хуаси (долг 67% → утрата контроля) и Уэлвина (коммерческое размытие) — в уставные решения.'},
+ {id:'E1',cat:'Экология',n:'ОВОС 4 площадок; буфер заказника; лесосека 1 млн м³',p:2,i:2,m:'ОВОС до эскизов; согласование лесобаланса; локальные очистные замкнутого цикла.',d:'П4 — статус пашни не подтверждён; Клязьма — рыбохозяйственная категория.'},
+ {id:'X1',cat:'Внешние',n:'Ставка/курс/санкции/смена власти/бюджетная политика',p:2,i:3,m:'Сценарии ФЭМ; трёхстороннее соглашение; включение в Стратегию области; Указ №81 для нерезидентов.',d:'Проект зависит от преемственности власти округа и области — закрепить до выборов.'}
+];
+const CATS=['Все','Финансы','Земля','Право','Демография','Производство','Управление','Экология','Внешние'];
+let rFilter='Все',rSort=false;
+function lvl(s){return s>=9?['Критический','b-crit']:s>=6?['Высокий','b-high']:['Средний','b-mid'];}
+function renderRisks(){
+ const rows=RISKS.filter(r=>rFilter==='Все'||r.cat===rFilter).slice();
+ if(rSort)rows.sort((a,b)=>b.p*b.i-a.p*a.i);
+ $('#riskBody').innerHTML=rows.map(r=>{const s=r.p*r.i,[ln,lc]=lvl(s);
+  return '<tr class="rrow" data-id="'+r.id+'"><td>'+r.id+'</td><td><span class="rname">'+r.n+'</span><span class="rcat">'+r.cat+'</span></td><td class="num">'+r.p+'</td><td class="num">'+r.i+'</td><td><span class="bdg '+lc+'">'+ln+' · '+s+'</span></td><td>'+r.m+'</td></tr><tr class="rdet"><td></td><td colspan="5"><b>Детализация:</b> '+r.d+'</td></tr>';}).join('');
+ $('#riskChips').innerHTML=CATS.map(c=>'<button class="chip'+(c===rFilter?' on':'')+'" data-cat="'+c+'">'+c+(c==='Все'?' ('+RISKS.length+')':'')+'</button>').join('')+'<button class="chip sort'+(rSort?' on':'')+'" data-sort="1">⇅ по уровню</button>';}
+$('#riskChips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;if(c.dataset.sort){rSort=!rSort;}else{rFilter=c.dataset.cat;}renderRisks();});
+$('#riskBody').addEventListener('click',e=>{const r=e.target.closest('.rrow');if(r)r.classList.toggle('open');});
+renderRisks();
+$('#x-risks').innerHTML='<p class="tcap">Таблица 12.1 — Полная матрица рисков (В — вероятность 1–3, У — влияние 1–3, уровень = В×У)</p><div class="tw"><table><thead><tr><th>№</th><th>Категория</th><th>Риск</th><th class="num">В×У</th><th>Уровень</th><th>Мера снижения и детализация</th></tr></thead><tbody>'
+ +RISKS.slice().sort((a,b)=>b.p*b.i-a.p*a.i).map(r=>{const s=r.p*r.i,[ln]=lvl(s);return '<tr><td>'+r.id+'</td><td>'+r.cat+'</td><td><b>'+r.n+'</b></td><td class="num">'+s+'</td><td>'+ln+'</td><td>'+r.m+' '+r.d+'</td></tr>';}).join('')+'</tbody></table></div>';
+
+/* ---------- gantt twin ---------- */
+$('#x-gantt').innerHTML='<p class="tcap">Таблица 15.0 — Ленточный план по площадкам и контурам</p><div class="tw"><table><thead><tr><th>Контур</th><th>2026–2030</th><th>2031–2038</th><th>2039–2046</th></tr></thead><tbody>'
+ +'<tr><td><b>П3 · Старое Аннино</b></td><td>Стройбаза, лесопилка, ДСК; 4–6 → 30–50 → 400 домов</td><td>Тиражирование микрорайонов</td><td>Завершение</td></tr>'
+ +'<tr><td><b>П1 · севернее Петушков</b></td><td>Жилищный пилот 30–50 домов (2027–2030)</td><td>Рост до 2040</td><td>Завершение</td></tr>'
+ +'<tr><td><b>П2 · западнее Костерёва</b></td><td>Проектирование</td><td>Деловой узел, логистика М-7 (2031–2038)</td><td>—</td></tr>'
+ +'<tr><td><b>П4 · Аббакумово</b></td><td>ОВОС, статус земель</td><td>Агроусадьбы с 2033</td><td>Агротуризм, завершение 2044</td></tr>'
+ +'<tr><td><b>СПоК / АПК</b></td><td>Регистрация 2027, мини-фермы, ЕСХН</td><td>Проектная мощность</td><td>Полный агрооборот</td></tr>'
+ +'<tr><td><b>ДСК / кластеры</b></td><td>Пилот 10–20 шт, ТОР-заявка</td><td>7 кластеров поэтапно</td><td>Мощность</td></tr>'
+ +'<tr><td><b>Демограф. программа</b></td><td>Фонд, старт ≥2030</td><td>Пилот 100–200 семей → масштаб</td><td>Пик 2043; хвост до 2064</td></tr>'
+ +'</tbody></table></div>';
+
+/* ================= DOCX EXPORT (offline, real .docx via ZIP) ================= */
+const CRC_T=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0;}return t;})();
+function crc32(b){let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=CRC_T[(c^b[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0;}
+function zipStore(files){const enc=new TextEncoder(),parts=[],central=[];let offset=0;const d=new Date();
+ const tm=(d.getHours()<<11)|(d.getMinutes()<<5)|(d.getSeconds()>>1),dt=((d.getFullYear()-1980)<<9)|((d.getMonth()+1)<<5)|d.getDate();
+ files.forEach(f=>{const nm=enc.encode(f.name),data=enc.encode(f.data),crc=crc32(data);
+  const lh=new DataView(new ArrayBuffer(30));lh.setUint32(0,0x04034b50,true);lh.setUint16(4,20,true);lh.setUint16(6,0x0800,true);lh.setUint16(8,0,true);lh.setUint16(10,tm,true);lh.setUint16(12,dt,true);lh.setUint32(14,crc,true);lh.setUint32(18,data.length,true);lh.setUint32(22,data.length,true);lh.setUint16(26,nm.length,true);lh.setUint16(28,0,true);
+  parts.push(new Uint8Array(lh.buffer),nm,data);
+  const ch=new DataView(new ArrayBuffer(46));ch.setUint32(0,0x02014b50,true);ch.setUint16(4,20,true);ch.setUint16(6,20,true);ch.setUint16(8,0x0800,true);ch.setUint16(10,0,true);ch.setUint16(12,tm,true);ch.setUint16(14,dt,true);ch.setUint32(16,crc,true);ch.setUint32(20,data.length,true);ch.setUint32(24,data.length,true);ch.setUint16(28,nm.length,true);ch.setUint32(42,offset,true);
+  central.push(new Uint8Array(ch.buffer),nm);offset+=30+nm.length+data.length;});
+ let cd=0;central.forEach(p=>cd+=p.length);
+ const eo=new DataView(new ArrayBuffer(22));eo.setUint32(0,0x06054b50,true);eo.setUint16(8,files.length,true);eo.setUint16(10,files.length,true);eo.setUint32(12,cd,true);eo.setUint32(16,offset,true);
+ return new Blob([...parts,...central,new Uint8Array(eo.buffer)],{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});}
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function wRun(t,o){if(!t)return'';let r='';if(o.b)r+='<w:b/>';if(o.i)r+='<w:i/>';if(o.color)r+='<w:color w:val="'+o.color+'"/>';if(o.font)r+='<w:rFonts w:ascii="'+o.font+'" w:hAnsi="'+o.font+'"/>';if(o.sz)r+='<w:sz w:val="'+o.sz+'"/><w:szCs w:val="'+o.sz+'"/>';
+ return '<w:r>'+(r?'<w:rPr>'+r+'</w:rPr>':'')+'<w:t xml:space="preserve">'+esc(t)+'</w:t></w:r>';}
+const BR='<w:r><w:br/></w:r>';
+function wP(runs,pr){return '<w:p>'+(pr?'<w:pPr>'+pr+'</w:pPr>':'')+(runs||'')+'</w:p>';}
+const sty=n=>'<w:pStyle w:val="'+n+'"/>';
+const shd=f=>'<w:shd w:val="clear" w:color="auto" w:fill="'+f+'"/>';
+const bdrL=c=>'<w:pBdr><w:left w:val="single" w:sz="18" w:space="8" w:color="'+c+'"/></w:pBdr>';
+const ind=(l,h)=>'<w:ind w:left="'+l+'"'+(h?' w:hanging="'+h+'"':'')+'/>';
+const BLOCKS=['P','DIV','UL','OL','LI','TABLE','H1','H2','H3','H4','SECTION','ARTICLE','HEADER','FIGURE','BLOCKQUOTE','ASIDE','FOOTER'];
+function emit(node,o){let s='';for(const n of node.childNodes){
+ if(n.nodeType===3){const t=n.textContent.replace(/\s+/g,' ');if(t.trim()||t===' ')s+=wRun(t,o);continue;}
+ if(n.nodeType!==1)continue;const el=n,tag=el.tagName;
+ if(el.hasAttribute('data-noexport')||['SCRIPT','STYLE','SVG','BUTTON','INPUT','SELECT','IMG','NAV','CANVAS','IFRAME'].includes(tag))continue;
+ if(tag==='BR'){s+=BR;continue;}
+ if(o.cell&&BLOCKS.includes(tag)){if(s&&!s.endsWith('</w:br/></w:r>'))s+=BR;s+=emit(el,o);continue;}
+ if(!o.cell&&(tag==='UL'||tag==='OL'))continue;
+ const oo={...o};
+ if(tag==='B'||tag==='STRONG')oo.b=1;
+ if(tag==='I'||tag==='EM')oo.i=1;
+ if(tag==='CODE'||el.classList.contains('mono'))oo.font='Consolas';
+ if(tag==='A')oo.color='2E6E8E';
+ if(tag==='SMALL')oo.sz=18;
+ s+=emit(el,oo);}return s;}
+function listXml(el,ordered,depth){let s='',i=0;
+ for(const li of el.children){if(li.tagName!=='LI')continue;i++;
+  const pre=ordered?(i+'. '):'• ';
+  s+=wP(wRun(pre,{b:ordered?1:0})+emit(li,{}),ind(420+depth*360,210));
+  for(const sub of li.children)if(sub.tagName==='UL'||sub.tagName==='OL')s+=listXml(sub,sub.tagName==='OL',depth+1);}
+ return s;}
+function tableXml(t){const rows=[...t.querySelectorAll('tr')];if(!rows.length)return'';
+ const cols=Math.max(...rows.map(r=>[...r.cells].reduce((a,c)=>a+(c.colSpan||1),0)));
+ const gw=Math.floor(9780/cols);
+ let x='<w:tbl><w:tblPr><w:tblW w:w="9780" w:type="dxa"/><w:tblBorders>'
+ +['top','left','bottom','right','insideH','insideV'].map(b=>'<w:'+b+' w:val="single" w:sz="4" w:space="0" w:color="C9BCA2"/>').join('')
+ +'</w:tblBorders><w:tblCellMar><w:top w:w="60" w:type="dxa"/><w:left w:w="90" w:type="dxa"/><w:bottom w:w="60" w:type="dxa"/><w:right w:w="90" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>'
+ +Array(cols).fill('<w:gridCol w:w="'+gw+'"/>').join('')+'</w:tblGrid>';
+ rows.forEach((r,ri)=>{const head=r.parentElement.tagName==='THEAD'||!!r.querySelector('th');
+  x+='<w:tr>'+(head?'<w:trPr><w:tblHeader/></w:trPr>':'');
+  for(const cell of r.cells){const span=cell.colSpan||1,w=gw*span;
+   const fill=head?'1F3D2B':(ri%2?'F3EDDF':'FFFDF7');
+   const runs=emit(cell,{cell:1,b:head?1:0,color:head?'F6F1E6':undefined,sz:18});
+   x+='<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/>'+(span>1?'<w:gridSpan w:val="'+span+'"/>':'')+shd(fill)+'<w:vAlign w:val="top"/></w:tcPr>'+wP(runs||wRun(' ',{sz:18}),'')+'</w:tc>';}
+  x+='</w:tr>';});
+ return x+'</w:tbl>'+wP('','');}
+function noteXml(c){let accent='2E6E8E',tint='E9F1F5';
+ if(c.classList.contains('risk')){accent='B3362B';tint='FBEDE9';}
+ else if(c.classList.contains('ok')){accent='2E7D46';tint='E9F3EC';}
+ else if(c.classList.contains('warn')){accent='C07F10';tint='F9F1DE';}
+ const pr=bdrL(accent)+shd(tint)+ind(240);let s='';
+ for(const ch of c.children){
+  if(ch.classList&&ch.classList.contains('note-t')){s+=wP(wRun('◆ '+ch.textContent.trim(),{b:1,color:accent,sz:22}),pr);continue;}
+  if(ch.tagName==='UL'||ch.tagName==='OL'){s+=listXml(ch,ch.tagName==='OL',0);continue;}
+  const r=emit(ch,{});if(r)s+=wP(r,pr);}
+ return s;}
+function blocks(el){let out='';for(const c of el.children){
+ if(c.hasAttribute('data-noexport'))continue;
+ const tag=c.tagName,cl=c.classList;
+ if(cl.contains('export-only')){out+=blocks(c);continue;}
+ if(cl.contains('note')){out+=noteXml(c);continue;}
+ if(cl.contains('kicker')){out+=wP(wRun(c.textContent.trim(),{color:'8A7F6A',sz:16}),'');continue;}
+ if(cl.contains('tcap')){out+=wP(wRun(c.textContent.trim(),{i:1,color:'6B6353',sz:18}),'');continue;}
+ switch(tag){
+  case 'H1':out+=wP(emit(c,{b:1}),sty('Title'));break;
+  case 'H2':out+=wP(emit(c,{}),sty('Heading1'));break;
+  case 'H3':out+=wP(emit(c,{}),sty('Heading2'));break;
+  case 'H4':out+=wP(emit(c,{}),sty('Heading3'));break;
+  case 'P':{const r=emit(c,{});if(r)out+=wP(r,'');break;}
+  case 'UL':case 'OL':out+=listXml(c,tag==='OL',0);break;
+  case 'TABLE':out+=tableXml(c);break;
+  case 'FIGCAPTION':out+=wP(emit(c,{i:1,color:'6B6353',sz:18}),sty('Caption'));break;
+  case 'HR':out+=wP('','<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="C9BCA2"/></w:pBdr>');break;
+  default:out+=blocks(c);}}
+ return out;}
+function buildDocx(){
+ const body=blocks($('#report'));
+ const doc='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+body
+ +'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="850" w:bottom="1134" w:left="1276" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>';
+ const styles='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
+ +'<w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:lang w:val="ru-RU"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="264" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
+ +'<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style>'
+ +'<w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:before="240" w:after="160"/><w:keepNext/></w:pPr><w:rPr><w:b/><w:sz w:val="48"/><w:color w:val="1F3D2B"/></w:rPr></w:style>'
+ +'<w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="320" w:after="140"/><w:outlineLvl w:val="0"/></w:pPr><w:rPr><w:b/><w:sz w:val="34"/><w:color w:val="1F3D2B"/></w:rPr></w:style>'
+ +'<w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="240" w:after="100"/><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/><w:sz w:val="27"/><w:color w:val="2E5A3C"/></w:rPr></w:style>'
+ +'<w:style w:type="paragraph" w:styleId="Heading3"><w:name w:val="heading 3"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="180" w:after="80"/><w:outlineLvl w:val="2"/></w:pPr><w:rPr><w:b/><w:sz w:val="23"/><w:color w:val="B4770A"/></w:rPr></w:style>'
+ +'<w:style w:type="paragraph" w:styleId="Caption"><w:name w:val="Caption"/><w:basedOn w:val="Normal"/><w:rPr><w:i/><w:sz w:val="18"/><w:color w:val="6B6353"/></w:rPr></w:style></w:styles>';
+ const ct='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>';
+ const rels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>';
+ const drels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>';
+ return zipStore([{name:'[Content_Types].xml',data:ct},{name:'_rels/.rels',data:rels},{name:'word/_rels/document.xml.rels',data:drels},{name:'word/styles.xml',data:styles},{name:'word/document.xml',data:doc}]);}
+function download(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);}
+function docFallback(){const html='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>body{font-family:"Times New Roman";font-size:11pt}table{border-collapse:collapse;width:100%}th,td{border:1px solid #999;padding:4pt 6pt;font-size:9pt}th{background:#1F3D2B;color:#fff}h2{color:#1F3D2B}h3{color:#2E5A3C}</style></head><body>'+$('#report').innerHTML.replace(/<svg[\s\S]*?<\/svg>/g,'')+'</body></html>';
+ download(new Blob(['\ufeff',html],{type:'application/msword'}),FNAME+'.doc');}
+$('#bDocx').addEventListener('click',()=>{overlay(true,'Формируем DOCX…');
+ setTimeout(()=>{try{download(buildDocx(),FNAME+'.docx');toast('DOCX сохранён — открывается в Word, LibreOffice, Google Docs.','');}
+ catch(e){console.error(e);try{docFallback();toast('DOCX-упаковка недоступна — сохранён совместимый .doc','info');}catch(e2){toast('Ошибка экспорта: '+e2.message,'err');}}
+ finally{overlay(false);}},80);});
+
+/* ================= PDF EXPORT ================= */
+function loadScript(src,ms){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;const t=setTimeout(()=>{s.remove();rej(new Error('timeout'));},ms);s.onload=()=>{clearTimeout(t);res();};s.onerror=()=>{clearTimeout(t);s.remove();rej(new Error('load'));};document.head.appendChild(s);});}
+async function exportPdf(){overlay(true,'Готовим PDF…');
+ try{
+  if(!navigator.onLine)throw new Error('offline');
+  const art=$('#report');if(art.scrollHeight>12000)throw new Error('too-tall');
+  if(!window.html2pdf)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js',6500);
+  document.body.classList.add('pdf-mode');await new Promise(r=>setTimeout(r,80));
+  const scale=Math.min(2,Math.max(1,15000/art.scrollHeight));
+  await window.html2pdf().set({margin:[10,10,12,10],filename:FNAME+'.pdf',image:{type:'jpeg',quality:.95},html2canvas:{scale,useCORS:true,backgroundColor:'#F6F1E6',logging:false},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy'],avoid:['tr','.note']}}).from(art).save();
+  toast('PDF сохранён.','');
+ }catch(e){
+  toast('Прямая генерация недоступна — открываем системный диалог. Выберите «Сохранить как PDF».','info');
+  setTimeout(()=>window.print(),400);
+ }finally{document.body.classList.remove('pdf-mode');overlay(false);}}
+$('#bPdf').addEventListener('click',exportPdf);
+$('#bPrint').addEventListener('click',()=>{toast('В диалоге печати выберите «Сохранить как PDF».','info');setTimeout(()=>window.print(),300);});
+
+})();
+</script>
+</body>
+</html>
+```
